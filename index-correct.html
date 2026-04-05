@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K&P Plomberie — Plombier Île-de-France, Intervention Rapide</title>
+<meta name="description" content="K&P Plomberie intervient sur toute l'Île-de-France. Dépannage urgent, rénovation, chaudière. Devis gratuit. Garantie 3 mois.">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1B4FD8;
+  --blue-dark: #1340B8;
+  --blue-light: #EEF3FF;
+  --orange: #F26522;
+  --orange-light: #FFF4EE;
+  --green: #16A34A;
+  --green-light: #F0FDF4;
+  --text: #0F172A;
+  --text-2: #475569;
+  --text-3: #94A3B8;
+  --border: #E2E8F0;
+  --bg: #F8FAFC;
+  --white: #FFFFFF;
+  --radius: 16px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top:0; width:100%; z-index:200;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 64px;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.25rem; font-weight: 800;
+  color: var(--text); letter-spacing: -0.5px;
+}
+.logo em { color: var(--blue); font-style: normal; }
+
+.nav-links { display:flex; gap:32px; align-items:center; }
+.nav-links a {
+  color: var(--text-2); text-decoration:none;
+  font-size: 0.88rem; font-weight:500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--blue); }
+
+.btn-call {
+  display:flex; align-items:center; gap:8px;
+  background: var(--orange);
+  color: white; padding: 10px 20px;
+  border-radius: 10px; font-weight: 700;
+  font-size: 0.9rem; text-decoration:none;
+  transition: all 0.2s;
+}
+.btn-call:hover { background:#d95a1d; transform:translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  padding: 120px 64px 80px;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(160deg, #F8FAFF 0%, #FFFFFF 60%);
+}
+
+.hero-badge {
+  display: inline-flex; align-items:center; gap:8px;
+  background: var(--green-light);
+  color: var(--green);
+  padding: 6px 14px; border-radius:50px;
+  font-size:0.78rem; font-weight:700;
+  letter-spacing:0.3px;
+  margin-bottom:24px;
+}
+.badge-dot {
+  width:7px; height:7px; background:var(--green);
+  border-radius:50%; animation: blink 2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.hero h1 {
+  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  font-weight: 800; letter-spacing:-2px;
+  line-height: 1.08; margin-bottom:20px;
+  color: var(--text);
+}
+.hero h1 span { color: var(--blue); }
+
+.hero-desc {
+  font-size: 1.05rem; color: var(--text-2);
+  line-height: 1.75; margin-bottom:36px;
+  max-width: 480px;
+}
+
+.hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+
+.btn-primary {
+  display:inline-flex; align-items:center; gap:9px;
+  background: var(--blue); color:white;
+  padding:14px 28px; border-radius:12px;
+  font-weight:700; font-size:0.95rem;
+  text-decoration:none; border:none; cursor:pointer;
+  transition:all 0.2s;
+}
+.btn-primary:hover { background:var(--blue-dark); transform:translateY(-2px); box-shadow:0 8px 24px rgba(27,79,216,0.3); }
+
+.btn-outline {
+  display:inline-flex; align-items:center; gap:9px;
+  background: white; color:var(--text);
+  padding:14px 28px; border-radius:12px;
+  font-weight:600; font-size:0.95rem;
+  text-decoration:none; border:1px solid var(--border);
+  cursor:pointer; transition:all 0.2s;
+}
+.btn-outline:hover { border-color:var(--blue); color:var(--blue); }
+
+.hero-trust {
+  display:flex; gap:28px; margin-top:40px;
+  padding-top:32px; border-top:1px solid var(--border);
+}
+.trust-item { }
+.trust-num {
+  font-size:1.6rem; font-weight:800;
+  color:var(--blue); letter-spacing:-1px;
+}
+.trust-label { font-size:0.78rem; color:var(--text-3); margin-top:2px; }
+
+/* hero photos */
+.hero-photos {
+  display: grid; grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 12px;
+}
+.hero-photo {
+  border-radius: 16px; overflow:hidden;
+  aspect-ratio:4/3;
+}
+.hero-photo.tall {
+  grid-row: span 2; aspect-ratio: auto;
+  min-height: 320px;
+}
+.hero-photo img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.4s;
+}
+.hero-photo:hover img { transform:scale(1.04); }
+
+/* ── TRUST BAR ── */
+.trust-bar {
+  background: var(--blue);
+  padding: 18px 64px;
+  display:flex; justify-content:center; align-items:center;
+  gap:60px; flex-wrap:wrap;
+}
+.trust-bar-item {
+  display:flex; align-items:center; gap:10px;
+  color:white; font-size:0.88rem; font-weight:600;
+}
+.trust-bar-item span:first-child { font-size:1.1rem; }
+
+/* ── SECTIONS ── */
+section { padding: 90px 64px; }
+section:nth-child(even) { background: var(--bg); }
+
+.section-eyebrow {
+  font-size:0.72rem; font-weight:800;
+  letter-spacing:3px; text-transform:uppercase;
+  color:var(--blue); margin-bottom:12px;
+}
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight:800; letter-spacing:-1px;
+  line-height:1.15; margin-bottom:14px;
+}
+.section-sub {
+  color:var(--text-2); font-size:0.95rem;
+  line-height:1.75; max-width:520px;
+}
+
+/* ── SERVICES ── */
+.services-header {
+  display:flex; justify-content:space-between;
+  align-items:flex-end; margin-bottom:48px; gap:32px;
+}
+.services-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+}
+.service-card {
+  background:white; border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+  transition:all 0.25s; cursor:default;
+}
+.service-card:hover {
+  border-color:var(--blue);
+  box-shadow: var(--shadow-lg);
+  transform:translateY(-3px);
+}
+.svc-icon {
+  width:48px; height:48px; background:var(--blue-light);
+  border-radius:12px; display:flex; align-items:center;
+  justify-content:center; font-size:1.3rem; margin-bottom:16px;
+}
+.service-card h3 {
+  font-size:1rem; font-weight:700; margin-bottom:8px;
+}
+.service-card p { color:var(--text-2); font-size:0.85rem; line-height:1.65; }
+.svc-price {
+  margin-top:14px; font-size:0.82rem;
+  color:var(--blue); font-weight:700;
+}
+
+/* ── TARIFS ── */
+.tarifs-intro {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:80px; align-items:center; margin-bottom:48px;
+}
+.tarifs-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+}
+.tarif-card {
+  background:white; border:1px solid var(--border);
+  border-radius:var(--radius); padding:28px;
+}
+.tarif-card h3 {
+  font-size:0.9rem; font-weight:700;
+  padding-bottom:14px; margin-bottom:14px;
+  border-bottom:1px solid var(--border);
+}
+.tarif-row {
+  display:flex; justify-content:space-between;
+  align-items:center; padding:9px 0;
+  border-bottom:1px solid #F1F5F9; font-size:0.85rem;
+}
+.tarif-row:last-child { border:none; }
+.tarif-row strong { color:var(--blue); font-weight:700; }
+.tarif-note {
+  margin-top:24px; padding:16px 20px;
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:8px; font-size:0.82rem;
+  color:var(--text-2); grid-column:span 3;
+}
+
+/* ── GALLERY ── */
+.gallery-grid {
+  display:grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 240px 240px;
+  gap:12px; margin-top:48px;
+}
+.gallery-cell {
+  border-radius:14px; overflow:hidden; position:relative;
+}
+.gallery-cell.span-col { grid-column:span 1; grid-row:span 2; }
+.gallery-cell img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform 0.4s;
+}
+.gallery-cell:hover img { transform:scale(1.05); }
+.gallery-tag {
+  position:absolute; bottom:12px; left:12px;
+  background:rgba(255,255,255,0.92);
+  color:var(--text); font-size:0.72rem; font-weight:700;
+  padding:4px 10px; border-radius:50px;
+  backdrop-filter:blur(4px);
+}
+
+/* ── ZONE ── */
+.zone-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:60px; align-items:center; margin-top:48px;
+}
+.zone-map {
+  border-radius:var(--radius); overflow:hidden;
+  height:380px; border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+.zone-map iframe { width:100%; height:100%; border:none; }
+.dept-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+}
+.dept-pill {
+  background:white; border:1px solid var(--border);
+  border-radius:10px; padding:12px 16px;
+  display:flex; align-items:center; gap:10px;
+  font-size:0.88rem; font-weight:500;
+  transition:all 0.2s;
+}
+.dept-pill:hover { border-color:var(--blue); background:var(--blue-light); }
+.dept-dot {
+  width:8px; height:8px; background:var(--blue);
+  border-radius:50%; flex-shrink:0;
+}
+.zone-cta-box {
+  margin-top:24px; padding:20px 24px;
+  background:var(--blue-light); border-radius:14px;
+}
+.zone-cta-box h4 {
+  font-weight:700; font-size:0.9rem; margin-bottom:4px;
+}
+.zone-cta-box p { color:var(--text-2); font-size:0.82rem; }
+
+/* ── DEVIS ── */
+.devis-wrap {
+  display:grid; grid-template-columns:1fr 1.4fr;
+  gap:60px; align-items:start; margin-top:48px;
+}
+.devis-features { }
+.devis-feat {
+  display:flex; gap:16px; margin-bottom:24px;
+}
+.feat-icon {
+  width:44px; height:44px; background:var(--blue-light);
+  border-radius:12px; display:flex; align-items:center;
+  justify-content:center; font-size:1.1rem; flex-shrink:0;
+}
+.feat-body h4 { font-size:0.92rem; font-weight:700; margin-bottom:3px; }
+.feat-body p { font-size:0.82rem; color:var(--text-2); }
+
+/* DEVIS GENERATOR */
+.devis-gen {
+  background:white; border:1px solid var(--border);
+  border-radius:20px; padding:36px;
+  box-shadow:var(--shadow-lg);
+}
+.devis-gen h3 {
+  font-size:1.1rem; font-weight:800;
+  margin-bottom:6px; letter-spacing:-0.3px;
+}
+.devis-gen > p {
+  font-size:0.82rem; color:var(--text-2);
+  margin-bottom:24px;
+}
+.gen-step { margin-bottom:20px; }
+.gen-label {
+  font-size:0.72rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:1.5px;
+  color:var(--text-3); margin-bottom:8px; display:block;
+}
+.gen-input, .gen-select {
+  width:100%; border:1px solid var(--border);
+  border-radius:10px; padding:12px 16px;
+  font-family:inherit; font-size:0.9rem;
+  color:var(--text); background:var(--bg);
+  transition:border 0.2s; outline:none;
+}
+.gen-input:focus, .gen-select:focus { border-color:var(--blue); background:white; }
+.gen-select option { background:white; }
+.gen-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.gen-btn {
+  width:100%; background:var(--blue); color:white;
+  border:none; border-radius:12px; padding:14px;
+  font-family:inherit; font-size:0.95rem; font-weight:700;
+  cursor:pointer; transition:all 0.2s; margin-top:4px;
+}
+.gen-btn:hover { background:var(--blue-dark); transform:translateY(-1px); }
+
+/* DEVIS RESULT */
+.devis-result {
+  display:none; margin-top:20px;
+  border:1px solid var(--border); border-radius:14px;
+  overflow:hidden;
+}
+.result-header {
+  background:var(--blue); color:white;
+  padding:16px 20px;
+}
+.result-header h4 { font-size:0.95rem; font-weight:700; }
+.result-header p { font-size:0.78rem; opacity:0.8; }
+.result-body { padding:16px 20px; }
+.result-line {
+  display:flex; justify-content:space-between;
+  padding:8px 0; border-bottom:1px solid #F1F5F9;
+  font-size:0.85rem;
+}
+.result-line:last-child { border:none; }
+.result-line strong { color:var(--blue); }
+.result-total {
+  background:var(--blue-light); padding:14px 20px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.result-total span:first-child { font-weight:700; }
+.result-total span:last-child {
+  font-size:1.3rem; font-weight:800; color:var(--blue);
+}
+.result-disclaimer {
+  padding:10px 20px; font-size:0.72rem;
+  color:var(--text-3); background:var(--bg);
+}
+.result-cta {
+  padding:14px 20px; background:white;
+  border-top:1px solid var(--border);
+  display:flex; gap:10px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--text); color:white;
+  padding:48px 64px 32px;
+}
+.footer-top {
+  display:flex; justify-content:space-between;
+  align-items:flex-start; margin-bottom:40px;
+  padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1);
+}
+.footer-logo {
+  font-size:1.2rem; font-weight:800; margin-bottom:8px;
+}
+.footer-logo em { color:var(--blue); font-style:normal; }
+.footer-desc { font-size:0.82rem; color:rgba(255,255,255,0.5); max-width:280px; line-height:1.7; }
+.footer-links h4 {
+  font-size:0.72rem; text-transform:uppercase;
+  letter-spacing:2px; color:rgba(255,255,255,0.4);
+  margin-bottom:14px;
+}
+.footer-links a {
+  display:block; color:rgba(255,255,255,0.7);
+  text-decoration:none; font-size:0.85rem;
+  margin-bottom:8px; transition:color 0.2s;
+}
+.footer-links a:hover { color:white; }
+.footer-contact a {
+  color:white; font-size:1.1rem; font-weight:700;
+  text-decoration:none; display:block; margin-bottom:6px;
+}
+.footer-contact p { color:rgba(255,255,255,0.5); font-size:0.82rem; }
+.footer-bottom {
+  display:flex; justify-content:space-between;
+  align-items:center; font-size:0.78rem;
+  color:rgba(255,255,255,0.35);
+}
+.footer-guarantee {
+  display:flex; align-items:center; gap:7px;
+  color:rgba(255,255,255,0.6); font-size:0.78rem;
+}
+
+/* ── CHATBOT ── */
+.chat-fab {
+  position:fixed; bottom:28px; right:28px;
+  width:58px; height:58px;
+  background:var(--blue); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; border:none; z-index:999;
+  box-shadow:0 4px 20px rgba(27,79,216,0.45);
+  transition:all 0.3s;
+}
+.chat-fab:hover { transform:scale(1.08); box-shadow:0 6px 28px rgba(27,79,216,0.5); }
+.chat-fab svg { width:24px; height:24px; fill:white; }
+.chat-notif {
+  position:absolute; top:-2px; right:-2px;
+  width:16px; height:16px; background:var(--orange);
+  border-radius:50%; border:2px solid white;
+  font-size:0.6rem; color:white; display:flex;
+  align-items:center; justify-content:center;
+  font-weight:700;
+}
+
+.chat-panel {
+  position:fixed; bottom:100px; right:28px;
+  width:370px; background:white;
+  border:1px solid var(--border);
+  border-radius:20px; box-shadow:var(--shadow-lg);
+  display:none; flex-direction:column; z-index:998;
+  overflow:hidden;
+  max-height: 580px;
+}
+.chat-panel.open { display:flex; }
+
+.chat-top {
+  background:var(--blue); padding:16px 20px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.chat-agent {
+  display:flex; align-items:center; gap:10px;
+}
+.agent-av {
+  width:38px; height:38px;
+  background:rgba(255,255,255,0.2); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+}
+.agent-name { font-weight:700; color:white; font-size:0.9rem; }
+.agent-status { font-size:0.7rem; color:rgba(255,255,255,0.75); }
+.chat-x {
+  background:none; border:none; color:rgba(255,255,255,0.7);
+  font-size:1.1rem; cursor:pointer;
+}
+.chat-x:hover { color:white; }
+
+.chat-msgs {
+  flex:1; overflow-y:auto;
+  padding:16px; display:flex;
+  flex-direction:column; gap:10px;
+  min-height:260px; max-height:340px;
+}
+.chat-msgs::-webkit-scrollbar { width:3px; }
+.chat-msgs::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }
+
+.bubble {
+  max-width:88%; padding:10px 14px;
+  border-radius:14px; font-size:0.85rem; line-height:1.55;
+}
+.bubble.bot {
+  background:var(--bg); color:var(--text);
+  align-self:flex-start; border-bottom-left-radius:4px;
+  border:1px solid var(--border);
+}
+.bubble.user {
+  background:var(--blue); color:white;
+  align-self:flex-end; border-bottom-right-radius:4px;
+}
+.typing { display:flex; gap:4px; padding:6px 0; align-items:center; }
+.typing span {
+  width:6px; height:6px; background:var(--text-3);
+  border-radius:50%; animation:dot 1.2s infinite;
+}
+.typing span:nth-child(2) { animation-delay:.2s; }
+.typing span:nth-child(3) { animation-delay:.4s; }
+@keyframes dot { 0%,100%{opacity:.3;transform:translateY(0)} 50%{opacity:1;transform:translateY(-4px)} }
+
+.chat-bottom {
+  padding:12px; border-top:1px solid var(--border);
+  display:flex; gap:8px; align-items:flex-end;
+}
+.chat-field {
+  flex:1; border:1px solid var(--border); border-radius:10px;
+  padding:10px 14px; font-family:inherit; font-size:0.85rem;
+  resize:none; outline:none; color:var(--text);
+  transition:border 0.2s; background:var(--bg);
+  max-height:80px;
+}
+.chat-field:focus { border-color:var(--blue); background:white; }
+.chat-send-btn {
+  width:38px; height:38px; background:var(--blue);
+  border:none; border-radius:10px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:background 0.2s; flex-shrink:0;
+}
+.chat-send-btn:hover { background:var(--blue-dark); }
+.chat-send-btn svg { width:16px; height:16px; fill:white; }
+
+/* ── QUICK CHIPS ── */
+.quick-chips {
+  display:flex; gap:7px; flex-wrap:wrap;
+  padding:0 16px 10px;
+}
+.chip {
+  background:var(--blue-light); color:var(--blue);
+  border:1px solid rgba(27,79,216,0.2);
+  border-radius:50px; padding:5px 12px;
+  font-size:0.75rem; font-weight:600;
+  cursor:pointer; transition:all 0.2s;
+  white-space:nowrap;
+}
+.chip:hover { background:var(--blue); color:white; }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity:0; transform:translateY(20px); transition:opacity 0.55s ease, transform 0.55s ease; }
+.reveal.show { opacity:1; transform:translateY(0); }
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  .hero { grid-template-columns:1fr; padding:110px 20px 60px; gap:40px; }
+  .hero-photos { grid-template-rows:200px 200px; }
+  section { padding:64px 20px; }
+  .services-header { flex-direction:column; align-items:flex-start; gap:16px; }
+  .services-grid { grid-template-columns:1fr 1fr; }
+  .tarifs-intro { grid-template-columns:1fr; gap:24px; }
+  .tarifs-grid { grid-template-columns:1fr; }
+  .tarif-note { grid-column:span 1; }
+  .gallery-grid { grid-template-columns:1fr 1fr; grid-template-rows:auto; }
+  .gallery-cell.span-col { grid-column:span 2; grid-row:span 1; aspect-ratio:16/9; }
+  .zone-grid { grid-template-columns:1fr; }
+  .devis-wrap { grid-template-columns:1fr; }
+  .trust-bar { gap:20px; padding:14px 20px; }
+  .footer-top { flex-direction:column; gap:32px; }
+  .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
+  .chat-panel { width:calc(100vw - 32px); right:16px; bottom:90px; }
+  .hero-trust { gap:20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">K<em>&</em>P Plomberie</div>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#realisations">Réalisations</a>
+    <a href="#zone">Zone</a>
+    <a href="#devis">Devis</a>
+    <a href="tel:0698252221" class="btn-call">📞 06 98 25 22 21</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-badge"><span class="badge-dot"></span> Disponible 7j/7 — Île-de-France</div>
+    <h1>Plombier de <span>confiance</span>,<br>travail soigné.</h1>
+    <p class="hero-desc">K&P Plomberie intervient partout en Île-de-France. Du dépannage urgent à la rénovation complète — devis 100% gratuit, tarifs transparents, garantie 3 mois.</p>
+    <div class="hero-actions">
+      <a href="tel:0698252221" class="btn-primary">📞 Appeler maintenant</a>
+      <a href="#devis" class="btn-outline">Devis instantané →</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><div class="trust-num">3 mois</div><div class="trust-label">Garantie incluse</div></div>
+      <div class="trust-item"><div class="trust-num">8 dept.</div><div class="trust-label">Île-de-France</div></div>
+      <div class="trust-item"><div class="trust-num">24h/24</div><div class="trust-label">Assistance IA</div></div>
+    </div>
+  </div>
+  <div class="hero-photos">
+    <div class="hero-photo tall">
+      <img src="PHOTO-2026-02-01-20-08-53_2.jpg" alt="Salle de bain rénovée K&P" onerror="this.parentElement.style.background='#EEF3FF'">
+    </div>
+    <div class="hero-photo">
+      <img src="PHOTO-2026-02-01-20-35-03.jpg" alt="Réalisation salle de bain" onerror="this.parentElement.style.background='#F0FDF4'">
+    </div>
+    <div class="hero-photo">
+      <img src="PHOTO-2026-02-01-20-08-41_2.jpg" alt="Installation plomberie" onerror="this.parentElement.style.background='#FFF4EE'">
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-item"><span>✅</span><span>Devis 100% gratuit</span></div>
+  <div class="trust-bar-item"><span>🛡️</span><span>Garantie 3 mois sur chaque intervention</span></div>
+  <div class="trust-bar-item"><span>⚡</span><span>Intervention rapide en IDF</span></div>
+  <div class="trust-bar-item"><span>💬</span><span>Assistant IA disponible 24h/24</span></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-eyebrow">Ce qu'on fait</div>
+      <h2 class="section-title">Toutes interventions<br>plomberie</h2>
+    </div>
+    <p class="section-sub">Du dépannage d'urgence à la rénovation haut de gamme — particuliers et professionnels IDF.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="svc-icon">🚨</div>
+      <h3>Dépannage Urgent</h3>
+      <p>Fuite, canalisation bouchée, chauffe-eau en panne. Intervention rapide pour stopper les dégâts.</p>
+      <div class="svc-price">À partir de 60€</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🚿</div>
+      <h3>Rénovation Salle de Bain</h3>
+      <p>Conception et installation complète — douche à l'italienne, baignoire, carrelage, sanitaires.</p>
+      <div class="svc-price">Devis personnalisé</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🔥</div>
+      <h3>Chaudière & Chauffage</h3>
+      <p>Installation, remplacement et entretien de chaudières gaz, pompes à chaleur, radiateurs.</p>
+      <div class="svc-price">À partir de 120€</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🔍</div>
+      <h3>Recherche de Fuites</h3>
+      <p>Détection et réparation de fuites invisibles — sous carrelage, dans les murs, en sous-sol.</p>
+      <div class="svc-price">À partir de 80€</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">🏗️</div>
+      <h3>Plomberie Neuve</h3>
+      <p>Installation complète des réseaux eau chaude/froide pour constructions neuves et rénovations.</p>
+      <div class="svc-price">Devis sur mesure</div>
+    </div>
+    <div class="service-card reveal">
+      <div class="svc-icon">📋</div>
+      <h3>Contrat Entretien</h3>
+      <p>Maintenance préventive régulière de votre installation. Idéal pour copropriétés et professionnels.</p>
+      <div class="svc-price">Sur abonnement</div>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section id="tarifs">
+  <div class="tarifs-intro reveal">
+    <div>
+      <div class="section-eyebrow">Transparence</div>
+      <h2 class="section-title">Tarifs indicatifs</h2>
+      <p class="section-sub">Nous affichons nos prix car nous n'avons rien à cacher. Devis définitif toujours gratuit avant toute intervention.</p>
+    </div>
+    <div style="background:var(--green-light);border:1px solid #BBF7D0;border-radius:16px;padding:28px;">
+      <div style="font-size:1.5rem;margin-bottom:8px;">🛡️</div>
+      <h4 style="font-weight:800;margin-bottom:6px;">Garantie Satisfaction</h4>
+      <p style="font-size:0.85rem;color:var(--text-2);line-height:1.65;">Chaque intervention est garantie <strong>3 mois</strong> pièces et main d'œuvre. Si le problème revient, nous revenons gratuitement.</p>
+    </div>
+  </div>
+  <div class="tarifs-grid">
+    <div class="tarif-card reveal">
+      <h3>🚨 Dépannage</h3>
+      <div class="tarif-row"><span>Diagnostic</span><strong>60€</strong></div>
+      <div class="tarif-row"><span>Débouchage simple</span><strong>80€</strong></div>
+      <div class="tarif-row"><span>Réparation fuite</span><strong>90–180€</strong></div>
+      <div class="tarif-row"><span>Remplacement robinet</span><strong>120–200€</strong></div>
+      <div class="tarif-row"><span>Chauffe-eau (remplacement)</span><strong>350–600€</strong></div>
+    </div>
+    <div class="tarif-card reveal">
+      <h3>🔥 Chaudière</h3>
+      <div class="tarif-row"><span>Entretien annuel</span><strong>120–180€</strong></div>
+      <div class="tarif-row"><span>Détartrage</span><strong>150–250€</strong></div>
+      <div class="tarif-row"><span>Remplacement brûleur</span><strong>200–400€</strong></div>
+      <div class="tarif-row"><span>Installation chaudière</span><strong>Sur devis</strong></div>
+      <div class="tarif-row"><span>Contrat annuel</span><strong>200–350€/an</strong></div>
+    </div>
+    <div class="tarif-card reveal">
+      <h3>🚿 Rénovation</h3>
+      <div class="tarif-row"><span>Installation WC</span><strong>150–300€</strong></div>
+      <div class="tarif-row"><span>Douche italienne</span><strong>Dès 800€</strong></div>
+      <div class="tarif-row"><span>Salle de bain complète</span><strong>Sur devis</strong></div>
+      <div class="tarif-row"><span>Raccordements cuisine</span><strong>200–500€</strong></div>
+      <div class="tarif-row"><span>Plomberie neuve</span><strong>Sur devis</strong></div>
+    </div>
+    <p class="tarif-note reveal">💡 Tarifs indicatifs hors fournitures. Devis gratuit et sans engagement avant toute intervention. Paiement uniquement après votre satisfaction.</p>
+  </div>
+</section>
+
+<!-- REALISATIONS -->
+<section id="realisations">
+  <div class="reveal">
+    <div class="section-eyebrow">Nos chantiers</div>
+    <h2 class="section-title">Réalisations</h2>
+    <p class="section-sub">Des installations techniques aux rénovations résidentielles haut de gamme.</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-cell span-col">
+      <img src="PHOTO-2026-02-01-20-08-41_2.jpg" alt="Installation industrielle" onerror="this.parentElement.style.background='#EEF3FF'">
+      <span class="gallery-tag">Installation industrielle</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="PHOTO-2026-02-01-20-08-52.jpg" alt="Réseau cuivre" onerror="this.parentElement.style.background='#F0FDF4'">
+      <span class="gallery-tag">Réseau cuivre</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="PHOTO-2026-02-01-20-08-41_3.jpg" alt="Distribution eau" onerror="this.parentElement.style.background='#FFF4EE'">
+      <span class="gallery-tag">Distribution eau froide</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="PHOTO-2026-02-01-20-08-42.jpg" alt="Réseau technique" onerror="this.parentElement.style.background='#EEF3FF'">
+      <span class="gallery-tag">Réseau technique</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="PHOTO-2026-02-01-20-08-53_2.jpg" alt="Salle de bain marbre" onerror="this.parentElement.style.background='#F0FDF4'">
+      <span class="gallery-tag">Salle de bain marbre</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="PHOTO-2026-02-01-20-35-03.jpg" alt="Salle de bain luxe" onerror="this.parentElement.style.background='#FFF4EE'">
+      <span class="gallery-tag">Salle de bain luxe</span>
+    </div>
+    <div class="gallery-cell">
+      <img src="PHOTO-2026-02-01-20-16-20.jpg" alt="Salle de bain design" onerror="this.parentElement.style.background='#EEF3FF'">
+      <span class="gallery-tag">Design contemporain</span>
+    </div>
+  </div>
+</section>
+
+<!-- ZONE -->
+<section id="zone">
+  <div class="reveal">
+    <div class="section-eyebrow">Secteur d'activité</div>
+    <h2 class="section-title">Zone d'intervention</h2>
+    <p class="section-sub">Nous couvrons l'ensemble de l'Île-de-France. Intervention possible le jour même.</p>
+  </div>
+  <div class="zone-grid">
+    <div class="zone-map reveal">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d336775.97!2d2.3488!3d48.8566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1706000000000!5m2!1sfr!2sfr" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <div class="reveal">
+      <div class="dept-grid">
+        <div class="dept-pill"><span class="dept-dot"></span>Paris (75)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Seine-et-Marne (77)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Yvelines (78)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Essonne (91)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Hauts-de-Seine (92)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Seine-Saint-Denis (93)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Val-de-Marne (94)</div>
+        <div class="dept-pill"><span class="dept-dot"></span>Val-d'Oise (95)</div>
+      </div>
+      <div class="zone-cta-box" style="margin-top:20px;">
+        <h4>🚗 Déplacement inclus</h4>
+        <p style="margin-top:4px;">Aucun frais de déplacement caché dans notre zone d'intervention. Ce que nous annonçons, c'est ce que vous payez.</p>
+      </div>
+      <a href="tel:0698252221" class="btn-primary" style="margin-top:20px;display:inline-flex;">📞 Vérifier ma zone — 06 98 25 22 21</a>
+    </div>
+  </div>
+</section>
+
+<!-- DEVIS GENERATOR -->
+<section id="devis">
+  <div class="devis-wrap">
+    <div class="devis-features reveal">
+      <div class="section-eyebrow">Gratuit & instantané</div>
+      <h2 class="section-title">Générateur<br>de devis</h2>
+      <p class="section-sub" style="margin-bottom:36px;">Obtenez une estimation immédiate pour votre intervention. Devis définitif confirmé par téléphone.</p>
+      <div class="devis-feat">
+        <div class="feat-icon">⚡</div>
+        <div class="feat-body"><h4>Estimation en 30 secondes</h4><p>Renseignez votre besoin, le prix s'affiche instantanément.</p></div>
+      </div>
+      <div class="devis-feat">
+        <div class="feat-icon">📞</div>
+        <div class="feat-body"><h4>Confirmation rapide</h4><p>Nous vous rappelons dans les 2 heures pour valider.</p></div>
+      </div>
+      <div class="devis-feat">
+        <div class="feat-icon">🛡️</div>
+        <div class="feat-body"><h4>Sans engagement</h4><p>Le devis est gratuit. Vous acceptez seulement si ça vous convient.</p></div>
+      </div>
+      <div class="devis-feat">
+        <div class="feat-icon">📄</div>
+        <div class="feat-body"><h4>Rapport d'intervention</h4><p>PDF détaillé envoyé par email après chaque visite.</p></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="devis-gen">
+        <h3>Estimez votre intervention</h3>
+        <p>Remplissez les champs ci-dessous pour une estimation immédiate</p>
+        <div class="gen-step">
+          <label class="gen-label">Type d'intervention</label>
+          <select class="gen-select" id="g-type" onchange="updateEstimate()">
+            <option value="">Sélectionner...</option>
+            <option value="depannage">Dépannage urgent</option>
+            <option value="fuite">Recherche et réparation de fuite</option>
+            <option value="debouchage">Débouchage canalisation</option>
+            <option value="chauffe-eau">Remplacement chauffe-eau</option>
+            <option value="chaudiere-entretien">Entretien chaudière</option>
+            <option value="chaudiere-install">Installation chaudière</option>
+            <option value="sdb-partielle">Rénovation partielle salle de bain</option>
+            <option value="sdb-complete">Rénovation complète salle de bain</option>
+            <option value="wc">Installation WC</option>
+            <option value="robinet">Remplacement robinet/mitigeur</option>
+            <option value="contrat">Contrat entretien annuel</option>
+            <option value="plomberie-neuve">Plomberie neuve</option>
+          </select>
+        </div>
+        <div class="gen-row">
+          <div class="gen-step">
+            <label class="gen-label">Ville / Département</label>
+            <input class="gen-input" id="g-ville" type="text" placeholder="Ex: Paris 75">
+          </div>
+          <div class="gen-step">
+            <label class="gen-label">Urgence ?</label>
+            <select class="gen-select" id="g-urgence" onchange="updateEstimate()">
+              <option value="normal">Non, sous 48–72h</option>
+              <option value="urgent">Oui, aujourd'hui</option>
+            </select>
+          </div>
+        </div>
+        <div class="gen-row">
+          <div class="gen-step">
+            <label class="gen-label">Votre prénom</label>
+            <input class="gen-input" id="g-prenom" type="text" placeholder="Prénom">
+          </div>
+          <div class="gen-step">
+            <label class="gen-label">Téléphone</label>
+            <input class="gen-input" id="g-tel" type="tel" placeholder="06 XX XX XX XX">
+          </div>
+        </div>
+        <button class="gen-btn" onclick="generateDevis()">Obtenir mon estimation →</button>
+
+        <!-- RESULT -->
+        <div class="devis-result" id="devisResult">
+          <div class="result-header">
+            <h4>📋 Estimation K&P Plomberie</h4>
+            <p id="r-date"></p>
+          </div>
+          <div class="result-body" id="r-body"></div>
+          <div class="result-total">
+            <span>Estimation totale</span>
+            <span id="r-total"></span>
+          </div>
+          <div class="result-disclaimer">* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place.</div>
+          <div class="result-cta">
+            <a href="tel:0698252221" class="btn-primary" style="flex:1;justify-content:center;font-size:0.85rem;padding:11px;">📞 Confirmer par téléphone</a>
+            <button onclick="resetDevis()" style="background:none;border:1px solid var(--border);border-radius:10px;padding:11px 16px;cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--text-2);">Nouvelle estimation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">K<em>&</em>P Plomberie</div>
+      <p class="footer-desc">Plombier professionnel en Île-de-France. Artisan qualifié, travail soigné, tarifs honnêtes.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navigation</h4>
+      <a href="#services">Services</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#realisations">Réalisations</a>
+      <a href="#zone">Zone</a>
+      <a href="#devis">Devis</a>
+    </div>
+    <div class="footer-contact">
+      <h4 style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.4);margin-bottom:14px;">Contact</h4>
+      <a href="tel:0698252221">06 98 25 22 21</a>
+      <p>Lun – Sam : 8h – 19h</p>
+      <p style="margin-top:4px;">Urgences 24h/24</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 K&P Plomberie — Tous droits réservés</span>
+    <div class="footer-guarantee">🛡️ Garantie 3 mois incluse sur chaque intervention</div>
+  </div>
+</footer>
+
+<!-- CHAT FAB -->
+<button class="chat-fab" onclick="toggleChat()" id="chatFab">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+  <span class="chat-notif">1</span>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-top">
+    <div class="chat-agent">
+      <div class="agent-av">🔧</div>
+      <div>
+        <div class="agent-name">Assistant K&P Plomberie</div>
+        <div class="agent-status">● En ligne — répond en quelques secondes</div>
+      </div>
+    </div>
+    <button class="chat-x" onclick="toggleChat()">✕</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs">
+    <div class="bubble bot">Bonjour ! 👋 Je suis l'assistant de K&P Plomberie.<br><br>Décrivez-moi votre problème de plomberie et je vais vous aider : type d'intervention, estimation de prix, prise de RDV...</div>
+  </div>
+  <div class="quick-chips" id="quickChips">
+    <span class="chip" onclick="chipSend(this)">💧 J'ai une fuite</span>
+    <span class="chip" onclick="chipSend(this)">🚿 Rénovation SDB</span>
+    <span class="chip" onclick="chipSend(this)">🔥 Problème chaudière</span>
+    <span class="chip" onclick="chipSend(this)">💰 Tarifs ?</span>
+  </div>
+  <div class="chat-bottom">
+    <textarea class="chat-field" id="chatField" placeholder="Décrivez votre problème..." rows="1" onkeydown="chatKey(event)" oninput="autoResize(this)"></textarea>
+    <button class="chat-send-btn" onclick="chatSend()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── CHATBOT ──
+let chatHistory = [];
+let chatOpen = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chatPanel').classList.toggle('open', chatOpen);
+  document.querySelector('.chat-notif').style.display = 'none';
+  if(chatOpen) document.getElementById('chatField').focus();
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+}
+
+function chatKey(e) {
+  if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); chatSend(); }
+}
+
+function chipSend(el) {
+  document.getElementById('chatField').value = el.textContent.trim();
+  document.getElementById('quickChips').style.display = 'none';
+  chatSend();
+}
+
+async function chatSend() {
+  const field = document.getElementById('chatField');
+  const msg = field.value.trim();
+  if(!msg) return;
+  field.value = ''; field.style.height = 'auto';
+
+  appendBubble(msg, 'user');
+  chatHistory.push({ role: 'user', content: msg });
+
+  const loader = appendBubble('', 'bot');
+  loader.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: `Tu es l'assistant virtuel de K&P Plomberie, entreprise de plomberie professionnelle en Île-de-France.
+
+TON RÔLE PRINCIPAL : Qualifier le problème du client en posant des questions précises, puis donner une estimation de prix et proposer un RDV.
+
+FLUX DE CONVERSATION :
+1. Identifier le type de problème (fuite ? chaudière ? rénovation ? urgence ?)
+2. Poser 1-2 questions pour préciser (où ? depuis quand ? quelle superficie ?)
+3. Donner une fourchette de prix claire
+4. Proposer d'être rappelé ou de prendre RDV
+
+INFOS K&P PLOMBERIE :
+- Téléphone : 06 98 25 22 21
+- Zone : Île-de-France (75,77,78,91,92,93,94,95)
+- Garantie : 3 mois sur chaque intervention
+- Devis : gratuit et sans engagement
+- Horaires : Lun-Sam 8h-19h, urgences 24h/24
+
+TARIFS :
+- Diagnostic : 60€ | Débouchage : 80€+ | Fuite : 90-180€
+- Robinet : 120-200€ | Chauffe-eau : 350-600€
+- Entretien chaudière : 120-180€ | Installation chaudière : sur devis
+- Rénovation SDB partielle : 800€+ | Complète : sur devis
+
+RÈGLES :
+- Réponds en français, ton chaleureux et professionnel
+- Sois concis (max 4 phrases)
+- Pour urgences → appel immédiat au 06 98 25 22 21
+- Donne toujours des fourchettes "à partir de" ou "environ X-Y€"
+- Si le problème est complexe → invite à appeler pour un devis sur place`,
+        messages: chatHistory
+      })
+    });
+    const data = await res.json();
+    const reply = data.content[0].text;
+    loader.remove();
+    appendBubble(reply, 'bot');
+    chatHistory.push({ role: 'assistant', content: reply });
+  } catch(err) {
+    loader.remove();
+    appendBubble('Je rencontre un souci technique. Appelez-nous directement au 📞 06 98 25 22 21 — nous sommes disponibles maintenant !', 'bot');
+  }
+}
+
+function appendBubble(text, type) {
+  const msgs = document.getElementById('chatMsgs');
+  const el = document.createElement('div');
+  el.className = `bubble ${type}`;
+  el.textContent = text;
+  msgs.appendChild(el);
+  msgs.scrollTop = msgs.scrollHeight;
+  return el;
+}
+
+// ── DEVIS GENERATOR ──
+const TARIFS = {
+  depannage: { label:'Dépannage urgent', min:60, max:180, items:[['Déplacement + diagnostic','60€'],['Main d\'œuvre','selon complexité']] },
+  fuite: { label:'Recherche et réparation de fuite', min:90, max:250, items:[['Recherche de fuite','60–120€'],['Réparation','30–130€']] },
+  debouchage: { label:'Débouchage canalisation', min:80, max:180, items:[['Diagnostic','60€'],['Débouchage','20–120€']] },
+  'chauffe-eau': { label:'Remplacement chauffe-eau', min:350, max:600, items:[['Dépose ancien appareil','inclus'],['Fourniture + pose','350–600€'],['Mise en service','inclus']] },
+  'chaudiere-entretien': { label:'Entretien chaudière', min:120, max:180, items:[['Nettoyage brûleur','inclus'],['Vérification sécurités','inclus'],['Rapport d\'entretien','inclus']] },
+  'chaudiere-install': { label:'Installation chaudière', min:800, max:2500, items:[['Fourniture chaudière','selon modèle'],['Pose et raccordements','400–800€'],['Mise en service','inclus']] },
+  'sdb-partielle': { label:'Rénovation partielle salle de bain', min:800, max:2500, items:[['Dépose et évacuation','150–300€'],['Raccordements plomberie','300–600€'],['Pose sanitaires','250–500€']] },
+  'sdb-complete': { label:'Rénovation complète salle de bain', min:3000, max:8000, items:[['Dépose complète','400–800€'],['Plomberie neuve','800–2000€'],['Pose sanitaires et carrelage','1800–5200€']] },
+  wc: { label:'Installation WC', min:150, max:300, items:[['Raccordement eau','inclus'],['Pose WC','150–300€']] },
+  robinet: { label:'Remplacement robinet/mitigeur', min:120, max:200, items:[['Dépose ancien robinet','inclus'],['Pose nouveau robinet','120–200€']] },
+  contrat: { label:'Contrat entretien annuel', min:200, max:350, items:[['Entretien annuel chaudière','inclus'],['Vérification installation','inclus'],['Priorité d\'intervention','inclus']] },
+  'plomberie-neuve': { label:'Plomberie neuve', min:1200, max:5000, items:[['Étude et plans','inclus'],['Fourniture matériaux','selon surface'],['Main d\'œuvre','selon complexité']] }
+};
+
+function updateEstimate() {}
+
+function generateDevis() {
+  const type = document.getElementById('g-type').value;
+  const urgence = document.getElementById('g-urgence').value;
+  const prenom = document.getElementById('g-prenom').value;
+  const tel = document.getElementById('g-tel').value;
+
+  if(!type) { alert('Veuillez sélectionner un type d\'intervention.'); return; }
+
+  const t = TARIFS[type];
+  let min = t.min; let max = t.max;
+  if(urgence === 'urgent') { min = Math.round(min * 1.2); max = Math.round(max * 1.2); }
+
+  const now = new Date();
+  document.getElementById('r-date').textContent = `Estimé le ${now.toLocaleDateString('fr-FR')} à ${now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}`;
+
+  let bodyHTML = '';
+  t.items.forEach(item => {
+    bodyHTML += `<div class="result-line"><span>${item[0]}</span><strong>${item[1]}</strong></div>`;
+  });
+  if(urgence === 'urgent') {
+    bodyHTML += `<div class="result-line"><span>Majoration urgence (+20%)</span><strong>incluse</strong></div>`;
+  }
+  document.getElementById('r-body').innerHTML = bodyHTML;
+  document.getElementById('r-total').textContent = `${min.toLocaleString()}€ – ${max.toLocaleString()}€`;
+
+  document.getElementById('devisResult').style.display = 'block';
+  document.getElementById('devisResult').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function resetDevis() {
+  document.getElementById('devisResult').style.display = 'none';
+  document.getElementById('g-type').value = '';
+  document.getElementById('g-prenom').value = '';
+  document.getElementById('g-tel').value = '';
+  document.getElementById('g-ville').value = '';
+}
+</script>
+</body>
+</html>
