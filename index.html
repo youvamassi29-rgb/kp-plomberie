@@ -603,7 +603,10 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <div class="logo">K<em>&</em>P Plomberie</div>
+  <a href="#" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+    <img src="logo.svg" alt="K&P Plomberie" style="height:36px;width:auto;">
+    <span class="logo" style="font-size:1rem;">Plomberie</span>
+  </a>
   <div class="nav-links">
     <a href="#services">Services</a>
     <a href="#tarifs">Tarifs</a>
@@ -834,9 +837,10 @@ footer {
       <div class="devis-gen">
         <h3>Estimez votre intervention</h3>
         <p>Remplissez les champs ci-dessous pour une estimation immédiate</p>
+
         <div class="gen-step">
           <label class="gen-label">Type d'intervention</label>
-          <select class="gen-select" id="g-type" onchange="updateEstimate()">
+          <select class="gen-select" id="g-type" onchange="updateFormContext()">
             <option value="">Sélectionner...</option>
             <option value="depannage">Dépannage urgent</option>
             <option value="fuite">Recherche et réparation de fuite</option>
@@ -852,6 +856,17 @@ footer {
             <option value="plomberie-neuve">Plomberie neuve</option>
           </select>
         </div>
+
+        <div class="gen-step" id="g-surface-wrap" style="display:none;">
+          <label class="gen-label">Surface approximative (m²)</label>
+          <input class="gen-input" id="g-surface" type="number" min="1" placeholder="Ex: 8">
+        </div>
+
+        <div class="gen-step">
+          <label class="gen-label">Description du problème (optionnel)</label>
+          <textarea class="gen-input" id="g-desc" rows="2" placeholder="Décrivez brièvement votre problème..." style="resize:vertical;min-height:64px;"></textarea>
+        </div>
+
         <div class="gen-row">
           <div class="gen-step">
             <label class="gen-label">Ville / Département</label>
@@ -859,12 +874,18 @@ footer {
           </div>
           <div class="gen-step">
             <label class="gen-label">Urgence ?</label>
-            <select class="gen-select" id="g-urgence" onchange="updateEstimate()">
+            <select class="gen-select" id="g-urgence">
               <option value="normal">Non, sous 48–72h</option>
               <option value="urgent">Oui, aujourd'hui</option>
             </select>
           </div>
         </div>
+
+        <div class="gen-step">
+          <label class="gen-label">Date d'intervention souhaitée</label>
+          <input class="gen-input" id="g-date-souhaitee" type="date">
+        </div>
+
         <div class="gen-row">
           <div class="gen-step">
             <label class="gen-label">Votre prénom</label>
@@ -875,17 +896,19 @@ footer {
             <input class="gen-input" id="g-tel" type="tel" placeholder="06 XX XX XX XX">
           </div>
         </div>
+
         <div class="gen-step">
           <label class="gen-label">Votre email</label>
           <input class="gen-input" id="g-email" type="email" placeholder="votre@email.com">
-          <p style="font-size:0.75rem;color:var(--text-3);margin-top:4px;">Ou écrivez-nous directement : <a href="mailto:kp-plomberie@outlook.fr" style="color:var(--blue);font-weight:600;">kp-plomberie@outlook.fr</a></p>
+          <p style="font-size:0.75rem;color:var(--text-3);margin-top:4px;">Ou écrivez-nous : <a href="mailto:kp-plomberie@outlook.fr" style="color:var(--blue);font-weight:600;">kp-plomberie@outlook.fr</a></p>
         </div>
+
         <button class="gen-btn" onclick="generateDevis()">Obtenir mon estimation →</button>
 
         <!-- RESULT -->
         <div class="devis-result" id="devisResult">
           <div class="result-header">
-            <h4>📋 Estimation K&P Plomberie</h4>
+            <h4>📋 Estimation K&amp;P Plomberie</h4>
             <p id="r-date"></p>
           </div>
           <div class="result-body" id="r-body"></div>
@@ -895,9 +918,14 @@ footer {
           </div>
           <div class="result-disclaimer">* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place.</div>
           <div class="result-cta">
-            <a href="tel:0698252221" class="btn-primary" style="flex:1;justify-content:center;font-size:0.85rem;padding:11px;">📞 Confirmer par téléphone</a>
-            <button onclick="resetDevis()" style="background:none;border:1px solid var(--border);border-radius:10px;padding:11px 16px;cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--text-2);">Nouvelle estimation</button>
+            <button onclick="downloadPDF()" class="btn-primary" style="flex:1;justify-content:center;font-size:0.85rem;padding:11px;border:none;cursor:pointer;font-family:inherit;">📥 Télécharger PDF</button>
+            <button onclick="sendByEmail()" id="btn-send-email" style="flex:1;background:none;border:1px solid var(--border);border-radius:10px;padding:11px;cursor:pointer;font-size:0.85rem;font-weight:600;color:var(--text);font-family:inherit;">📧 Envoyer par email</button>
           </div>
+          <div class="result-cta" style="border-top:none;padding-top:0;">
+            <a href="tel:0698252221" class="btn-outline" style="flex:1;justify-content:center;font-size:0.82rem;padding:10px;text-align:center;">📞 Confirmer par tél.</a>
+            <button onclick="resetDevis()" style="background:none;border:1px solid var(--border);border-radius:10px;padding:10px 14px;cursor:pointer;font-size:0.82rem;font-weight:600;color:var(--text-2);white-space:nowrap;font-family:inherit;">↺ Nouveau</button>
+          </div>
+          <div id="email-status" style="display:none;padding:10px 20px;font-size:0.8rem;text-align:center;border-top:1px solid var(--border);border-radius:0 0 14px 14px;"></div>
         </div>
       </div>
     </div>
@@ -908,7 +936,10 @@ footer {
 <footer>
   <div class="footer-top">
     <div>
-      <div class="footer-logo">K<em>&</em>P Plomberie</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <img src="logo.svg" alt="K&P" style="height:40px;width:auto;border-radius:6px;">
+        <span class="footer-logo" style="margin-bottom:0;">Plomberie</span>
+      </div>
       <p class="footer-desc">Plombier professionnel en Île-de-France. Artisan qualifié, travail soigné, tarifs honnêtes.</p>
     </div>
     <div class="footer-links">
@@ -967,6 +998,8 @@ footer {
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // ── SCROLL REVEAL ──
 const observer = new IntersectionObserver(entries => {
@@ -1072,59 +1105,326 @@ function appendBubble(text, type) {
   return el;
 }
 
-// ── DEVIS GENERATOR ──
+// ── EMAILJS CONFIG ──
+// Pour activer l'envoi email :
+// 1. Créez un compte gratuit sur https://www.emailjs.com (200 emails/mois offerts)
+// 2. Ajoutez votre service Outlook : Email Services > Add New Service
+// 3. Créez un template : Email Templates > Create New Template
+//    Variables à utiliser dans le template : {{to_email}}, {{client_name}},
+//    {{client_tel}}, {{client_email}}, {{intervention}}, {{description}},
+//    {{ville}}, {{urgence}}, {{date_souhaitee}}, {{estimation}}, {{devis_number}}, {{date_devis}}
+// 4. Remplacez les 3 clés ci-dessous par vos vraies valeurs
+const EMAILJS_PUBLIC_KEY  = 'VOTRE_CLE_PUBLIQUE';  // Account > API Keys
+const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';    // Email Services > Service ID
+const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';   // Email Templates > Template ID
+
+// ── DEVIS STATE ──
+let currentDevis = null;
+
+// ── TARIFS ──
 const TARIFS = {
-  depannage: { label:'Dépannage urgent', min:60, max:180, items:[['Déplacement + diagnostic','60€'],['Main d\'œuvre','selon complexité']] },
-  fuite: { label:'Recherche et réparation de fuite', min:90, max:250, items:[['Recherche de fuite','60–120€'],['Réparation','30–130€']] },
-  debouchage: { label:'Débouchage canalisation', min:80, max:180, items:[['Diagnostic','60€'],['Débouchage','20–120€']] },
-  'chauffe-eau': { label:'Remplacement chauffe-eau', min:350, max:600, items:[['Dépose ancien appareil','inclus'],['Fourniture + pose','350–600€'],['Mise en service','inclus']] },
-  'chaudiere-entretien': { label:'Entretien chaudière', min:120, max:180, items:[['Nettoyage brûleur','inclus'],['Vérification sécurités','inclus'],['Rapport d\'entretien','inclus']] },
-  'chaudiere-install': { label:'Installation chaudière', min:800, max:2500, items:[['Fourniture chaudière','selon modèle'],['Pose et raccordements','400–800€'],['Mise en service','inclus']] },
-  'sdb-partielle': { label:'Rénovation partielle salle de bain', min:800, max:2500, items:[['Dépose et évacuation','150–300€'],['Raccordements plomberie','300–600€'],['Pose sanitaires','250–500€']] },
-  'sdb-complete': { label:'Rénovation complète salle de bain', min:3000, max:8000, items:[['Dépose complète','400–800€'],['Plomberie neuve','800–2000€'],['Pose sanitaires et carrelage','1800–5200€']] },
-  wc: { label:'Installation WC', min:150, max:300, items:[['Raccordement eau','inclus'],['Pose WC','150–300€']] },
-  robinet: { label:'Remplacement robinet/mitigeur', min:120, max:200, items:[['Dépose ancien robinet','inclus'],['Pose nouveau robinet','120–200€']] },
-  contrat: { label:'Contrat entretien annuel', min:200, max:350, items:[['Entretien annuel chaudière','inclus'],['Vérification installation','inclus'],['Priorité d\'intervention','inclus']] },
-  'plomberie-neuve': { label:'Plomberie neuve', min:1200, max:5000, items:[['Étude et plans','inclus'],['Fourniture matériaux','selon surface'],['Main d\'œuvre','selon complexité']] }
+  depannage:           { label:'Dépannage urgent',                    min:60,   max:180,  items:[["Déplacement + diagnostic","60€"],["Main d'œuvre","selon complexité"]] },
+  fuite:               { label:'Recherche et réparation de fuite',    min:90,   max:250,  items:[["Recherche de fuite","60–120€"],["Réparation","30–130€"]] },
+  debouchage:          { label:'Débouchage canalisation',             min:80,   max:180,  items:[["Diagnostic","60€"],["Débouchage","20–120€"]] },
+  'chauffe-eau':       { label:'Remplacement chauffe-eau',            min:350,  max:600,  items:[["Dépose ancien appareil","inclus"],["Fourniture + pose","350–600€"],["Mise en service","inclus"]] },
+  'chaudiere-entretien':{ label:'Entretien chaudière',                min:120,  max:180,  items:[["Nettoyage brûleur","inclus"],["Vérification sécurités","inclus"],["Rapport d'entretien","inclus"]] },
+  'chaudiere-install': { label:'Installation chaudière',              min:800,  max:2500, items:[["Fourniture chaudière","selon modèle"],["Pose et raccordements","400–800€"],["Mise en service","inclus"]] },
+  'sdb-partielle':     { label:'Rénovation partielle salle de bain',  min:800,  max:2500, items:[["Dépose et évacuation","150–300€"],["Raccordements plomberie","300–600€"],["Pose sanitaires","250–500€"]] },
+  'sdb-complete':      { label:'Rénovation complète salle de bain',   min:3000, max:8000, items:[["Dépose complète","400–800€"],["Plomberie neuve","800–2000€"],["Pose sanitaires et carrelage","1800–5200€"]] },
+  wc:                  { label:'Installation WC',                     min:150,  max:300,  items:[["Raccordement eau","inclus"],["Pose WC","150–300€"]] },
+  robinet:             { label:'Remplacement robinet/mitigeur',       min:120,  max:200,  items:[["Dépose ancien robinet","inclus"],["Pose nouveau robinet","120–200€"]] },
+  contrat:             { label:'Contrat entretien annuel',            min:200,  max:350,  items:[["Entretien annuel chaudière","inclus"],["Vérification installation","inclus"],["Priorité d'intervention","inclus"]] },
+  'plomberie-neuve':   { label:'Plomberie neuve',                     min:1200, max:5000, items:[["Étude et plans","inclus"],["Fourniture matériaux","selon surface"],["Main d'œuvre","selon complexité"]] }
 };
 
-function updateEstimate() {}
+const SURFACE_TYPES = ['sdb-partielle','sdb-complete','plomberie-neuve'];
+
+function updateFormContext() {
+  const type = document.getElementById('g-type').value;
+  document.getElementById('g-surface-wrap').style.display = SURFACE_TYPES.includes(type) ? 'block' : 'none';
+}
 
 function generateDevis() {
-  const type = document.getElementById('g-type').value;
-  const urgence = document.getElementById('g-urgence').value;
-  const prenom = document.getElementById('g-prenom').value;
-  const tel = document.getElementById('g-tel').value;
+  const type     = document.getElementById('g-type').value;
+  const urgence  = document.getElementById('g-urgence').value;
+  const prenom   = document.getElementById('g-prenom').value.trim();
+  const tel      = document.getElementById('g-tel').value.trim();
+  const email    = document.getElementById('g-email').value.trim();
+  const ville    = document.getElementById('g-ville').value.trim();
+  const desc     = document.getElementById('g-desc').value.trim();
+  const surface  = parseFloat(document.getElementById('g-surface').value) || 0;
+  const dateSouh = document.getElementById('g-date-souhaitee').value;
 
-  if(!type) { alert('Veuillez sélectionner un type d\'intervention.'); return; }
+  if(!type) { alert("Veuillez sélectionner un type d'intervention."); return; }
 
   const t = TARIFS[type];
-  let min = t.min; let max = t.max;
+  let min = t.min, max = t.max;
+
+  if(surface > 0 && SURFACE_TYPES.includes(type)) {
+    const f = Math.max(1, surface / 8);
+    min = Math.round(min * Math.sqrt(f));
+    max = Math.round(max * Math.sqrt(f));
+  }
   if(urgence === 'urgent') { min = Math.round(min * 1.2); max = Math.round(max * 1.2); }
 
   const now = new Date();
-  document.getElementById('r-date').textContent = `Estimé le ${now.toLocaleDateString('fr-FR')} à ${now.toLocaleTimeString('fr-FR', {hour:'2-digit',minute:'2-digit'})}`;
+  const devisNum = 'DEV-' + now.getFullYear() +
+    String(now.getMonth()+1).padStart(2,'0') +
+    String(now.getDate()).padStart(2,'0') + '-' +
+    String(Math.floor(Math.random()*900)+100);
+  const total = min.toLocaleString('fr-FR') + '€ – ' + max.toLocaleString('fr-FR') + '€';
 
-  let bodyHTML = '';
+  currentDevis = { type, urgence, prenom, tel, email, ville, desc, surface, dateSouh, min, max, total, devisNum, date: now };
+
+  document.getElementById('r-date').textContent =
+    `Estimé le ${now.toLocaleDateString('fr-FR')} à ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} — Réf. ${devisNum}`;
+
+  let html = '';
   t.items.forEach(item => {
-    bodyHTML += `<div class="result-line"><span>${item[0]}</span><strong>${item[1]}</strong></div>`;
+    html += `<div class="result-line"><span>${item[0]}</span><strong>${item[1]}</strong></div>`;
   });
-  if(urgence === 'urgent') {
-    bodyHTML += `<div class="result-line"><span>Majoration urgence (+20%)</span><strong>incluse</strong></div>`;
-  }
-  document.getElementById('r-body').innerHTML = bodyHTML;
-  document.getElementById('r-total').textContent = `${min.toLocaleString()}€ – ${max.toLocaleString()}€`;
+  if(urgence === 'urgent')
+    html += `<div class="result-line" style="color:var(--orange)"><span>Majoration urgence (+20%)</span><strong>incluse ci-dessus</strong></div>`;
+  if(desc)
+    html += `<div class="result-line" style="font-style:italic;color:var(--text-2)"><span>💬 ${desc}</span></div>`;
+
+  document.getElementById('r-body').innerHTML = html;
+  document.getElementById('r-total').textContent = total;
+
+  const btnEmail = document.getElementById('btn-send-email');
+  btnEmail.disabled = false;
+  btnEmail.textContent = '📧 Envoyer par email';
+  document.getElementById('email-status').style.display = 'none';
 
   document.getElementById('devisResult').style.display = 'block';
   document.getElementById('devisResult').scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
+// ── PDF ──
+function downloadPDF() {
+  if(!currentDevis) return;
+  const d = currentDevis;
+  const t = TARIFS[d.type];
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit:'mm', format:'a4' });
+  const W = 210;
+  const BLUE = [27,79,216], DARK = [15,23,42], GREY = [71,85,105], LIGHT = [248,250,252], ORANGE = [242,101,34];
+
+  // ── EN-TÊTE ──
+  doc.setFillColor(...BLUE);
+  doc.rect(0, 0, W, 40, 'F');
+
+  // Logo K&P (dessiné avec des primitives)
+  doc.setFillColor(255,255,255);
+  doc.roundedRect(14, 7, 36, 26, 3, 3, 'F');
+  doc.setTextColor(...BLUE);
+  doc.setFont('times','bold');
+  doc.setFontSize(18);
+  doc.text('K', 18, 24);
+  doc.text('P', 38, 24);
+  doc.setFont('times','normal');
+  doc.setFontSize(10);
+  doc.setTextColor(91,141,238);
+  doc.text('&', 29.5, 22);
+  doc.setDrawColor(91,141,238);
+  doc.setLineWidth(0.6);
+  doc.line(18, 26.5, 46, 26.5);
+
+  // Texte en-tête
+  doc.setTextColor(255,255,255);
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(14);
+  doc.text('K&P Plomberie', 58, 16);
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.text('Plombier professionnel — Île-de-France', 58, 22);
+  doc.text('06 98 25 22 21  |  kp-plomberie@outlook.fr  |  Garantie 3 mois', 58, 28);
+
+  doc.setFont('helvetica','bold');
+  doc.setFontSize(10);
+  doc.text('DEVIS ESTIMATIF', W-14, 16, {align:'right'});
+  doc.setFont('helvetica','normal');
+  doc.setFontSize(8);
+  doc.text('N° ' + d.devisNum, W-14, 23, {align:'right'});
+  doc.text(d.date.toLocaleDateString('fr-FR'), W-14, 29, {align:'right'});
+
+  // ── BLOCS CLIENT / INTERVENTION ──
+  doc.setFillColor(...LIGHT);
+  doc.setDrawColor(226,232,240);
+  doc.roundedRect(14, 46, 86, 44, 3, 3, 'FD');
+  doc.roundedRect(110, 46, 86, 44, 3, 3, 'FD');
+
+  doc.setTextColor(...BLUE); doc.setFont('helvetica','bold'); doc.setFontSize(7.5);
+  doc.text('CLIENT', 19, 54);
+  doc.text('INTERVENTION', 115, 54);
+
+  doc.setTextColor(...DARK); doc.setFont('helvetica','normal'); doc.setFontSize(9);
+  doc.text(d.prenom || '—', 19, 62);
+  doc.text('Tél : ' + (d.tel || '—'), 19, 69);
+  doc.text('Email : ' + (d.email || '—'), 19, 76);
+  doc.text('Ville : ' + (d.ville || '—'), 19, 83);
+
+  doc.setFontSize(8.5);
+  const tLines = doc.splitTextToSize(t.label, 80);
+  doc.text(tLines, 115, 62);
+  const tH = tLines.length * 5;
+  doc.text('Urgence : ' + (d.urgence === 'urgent' ? 'Oui (J+0)' : 'Non (48–72h)'), 115, 62 + tH + 4);
+  if(d.dateSouh)
+    doc.text('Souhaité : ' + new Date(d.dateSouh).toLocaleDateString('fr-FR'), 115, 62 + tH + 10);
+  if(d.surface > 0 && SURFACE_TYPES.includes(d.type))
+    doc.text('Surface : ' + d.surface + ' m²', 115, 62 + tH + (d.dateSouh ? 16 : 10));
+
+  // ── TABLEAU ──
+  let y = 98;
+  doc.setFillColor(...BLUE);
+  doc.rect(14, y, W-28, 8, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(8.5);
+  doc.text('DÉSIGNATION', 19, y+5.5);
+  doc.text('MONTANT', W-18, y+5.5, {align:'right'});
+  y += 8;
+
+  t.items.forEach((item, i) => {
+    doc.setFillColor(i%2===0 ? 248:255, i%2===0 ? 250:255, i%2===0 ? 252:255);
+    doc.rect(14, y, W-28, 8, 'F');
+    doc.setTextColor(...DARK); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+    doc.text(item[0], 19, y+5.5);
+    doc.text(item[1], W-18, y+5.5, {align:'right'});
+    y += 8;
+  });
+
+  if(d.urgence === 'urgent') {
+    doc.setFillColor(255,244,238);
+    doc.rect(14, y, W-28, 8, 'F');
+    doc.setTextColor(...ORANGE); doc.setFont('helvetica','bolditalic'); doc.setFontSize(8.5);
+    doc.text('Majoration urgence (+20%)', 19, y+5.5);
+    doc.text('incluse', W-18, y+5.5, {align:'right'});
+    y += 8;
+  }
+
+  // Total
+  y += 3;
+  doc.setFillColor(238,243,255);
+  doc.setDrawColor(...BLUE);
+  doc.rect(14, y, W-28, 13, 'FD');
+  doc.setTextColor(...BLUE); doc.setFont('helvetica','bold'); doc.setFontSize(11);
+  doc.text('ESTIMATION TOTALE', 19, y+9);
+  doc.text(d.total, W-18, y+9, {align:'right'});
+  y += 19;
+
+  // Description
+  if(d.desc) {
+    doc.setTextColor(...GREY); doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text('Description :', 14, y);
+    y += 5;
+    doc.setFont('helvetica','italic');
+    const dLines = doc.splitTextToSize(d.desc, W-28);
+    doc.text(dLines, 14, y);
+    y += dLines.length * 5 + 5;
+  }
+
+  // Disclaimer
+  doc.setFillColor(255,244,238);
+  doc.rect(14, y, W-28, 13, 'F');
+  doc.setTextColor(...GREY); doc.setFontSize(7.5); doc.setFont('helvetica','italic');
+  doc.text('* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place.', 18, y+5);
+  doc.text('Garantie 3 mois sur chaque intervention. Paiement uniquement après votre satisfaction.', 18, y+10);
+  y += 19;
+
+  // Signatures
+  doc.setDrawColor(226,232,240);
+  doc.setTextColor(...GREY); doc.setFontSize(8); doc.setFont('helvetica','normal');
+  doc.text('Signature client :', 14, y+5);
+  doc.rect(14, y+8, 82, 22);
+  doc.text('Cachet K&P Plomberie :', 114, y+5);
+  doc.rect(114, y+8, 82, 22);
+
+  // Pied de page
+  doc.setFillColor(...DARK);
+  doc.rect(0, 276, W, 21, 'F');
+  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(9);
+  doc.text('K&P Plomberie', 14, 284);
+  doc.setFont('helvetica','normal'); doc.setFontSize(8);
+  doc.text('06 98 25 22 21  |  kp-plomberie@outlook.fr', 14, 291);
+  doc.setTextColor(148,163,184); doc.setFontSize(7.5);
+  doc.text('Garantie 3 mois incluse sur chaque intervention', W-14, 284, {align:'right'});
+  doc.text('Île-de-France — 75, 77, 78, 91, 92, 93, 94, 95', W-14, 291, {align:'right'});
+
+  doc.save('Devis_KP_Plomberie_' + d.devisNum + '.pdf');
+}
+
+// ── EMAIL ──
+async function sendByEmail() {
+  if(!currentDevis) return;
+  const d = currentDevis;
+
+  if(!d.email) {
+    alert('Veuillez renseigner votre email pour recevoir le devis.');
+    document.getElementById('g-email').focus();
+    return;
+  }
+
+  if(EMAILJS_PUBLIC_KEY === 'VOTRE_CLE_PUBLIQUE') {
+    showEmailStatus('warning',
+      '⚙️ Envoi email non encore configuré. ' +
+      '<a href="mailto:kp-plomberie@outlook.fr?subject=Devis ' + d.devisNum +
+      '&body=Ref: ' + d.devisNum + ' | ' + TARIFS[d.type].label + ' | Estimation: ' + d.total +
+      '" style="color:inherit;font-weight:700;">Cliquez ici pour envoyer manuellement →</a>'
+    );
+    return;
+  }
+
+  const btn = document.getElementById('btn-send-email');
+  btn.disabled = true;
+  btn.textContent = '⏳ Envoi en cours…';
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:       d.email,
+      client_name:    d.prenom      || 'Client',
+      client_tel:     d.tel         || '—',
+      client_email:   d.email,
+      intervention:   TARIFS[d.type].label,
+      description:    d.desc        || '—',
+      ville:          d.ville       || '—',
+      urgence:        d.urgence === 'urgent' ? 'Oui — intervention le jour même' : 'Non — sous 48–72h',
+      date_souhaitee: d.dateSouh ? new Date(d.dateSouh).toLocaleDateString('fr-FR') : '—',
+      estimation:     d.total,
+      devis_number:   d.devisNum,
+      date_devis:     d.date.toLocaleDateString('fr-FR')
+    }, EMAILJS_PUBLIC_KEY);
+
+    btn.textContent = '✅ Envoyé !';
+    showEmailStatus('success', '✅ Devis envoyé à <strong>' + d.email + '</strong> et à K&amp;P Plomberie !');
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = '📧 Envoyer par email';
+    showEmailStatus('error', '⚠️ Erreur d\'envoi. Contactez-nous : <a href="mailto:kp-plomberie@outlook.fr" style="color:inherit;font-weight:700;">kp-plomberie@outlook.fr</a>');
+  }
+}
+
+function showEmailStatus(type, html) {
+  const el = document.getElementById('email-status');
+  const styles = {
+    success: ['var(--green-light)','var(--green)'],
+    warning: ['var(--orange-light)','var(--orange)'],
+    error:   ['#FEF2F2','#DC2626']
+  };
+  const [bg, color] = styles[type] || styles.warning;
+  el.style.background = bg;
+  el.style.color = color;
+  el.innerHTML = html;
+  el.style.display = 'block';
+}
+
 function resetDevis() {
   document.getElementById('devisResult').style.display = 'none';
-  document.getElementById('g-type').value = '';
-  document.getElementById('g-prenom').value = '';
-  document.getElementById('g-tel').value = '';
-  document.getElementById('g-ville').value = '';
+  ['g-type','g-prenom','g-tel','g-email','g-ville','g-desc','g-surface','g-date-souhaitee'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = '';
+  });
+  document.getElementById('g-surface-wrap').style.display = 'none';
+  document.getElementById('g-urgence').value = 'normal';
+  currentDevis = null;
 }
 </script>
 </body>
