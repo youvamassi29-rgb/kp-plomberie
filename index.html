@@ -630,7 +630,7 @@ footer {
     <div class="hero-trust">
       <div class="trust-item"><div class="trust-num">3 mois</div><div class="trust-label">Garantie incluse</div></div>
       <div class="trust-item"><div class="trust-num">8 dept.</div><div class="trust-label">Île-de-France</div></div>
-      <div class="trust-item"><div class="trust-num">24h/24</div><div class="trust-label">Assistance IA</div></div>
+      <div class="trust-item"><div class="trust-num">24h/24</div><div class="trust-label">Assistance</div></div>
     </div>
   </div>
   <div class="hero-photos">
@@ -651,7 +651,7 @@ footer {
   <div class="trust-bar-item"><span>✅</span><span>Devis 100% gratuit</span></div>
   <div class="trust-bar-item"><span>🛡️</span><span>Garantie 3 mois sur chaque intervention</span></div>
   <div class="trust-bar-item"><span>⚡</span><span>Intervention rapide en IDF</span></div>
-  <div class="trust-bar-item"><span>💬</span><span>Assistant IA disponible 24h/24</span></div>
+  <div class="trust-bar-item"><span>💬</span><span>Assistance disponible 24h/24</span></div>
 </div>
 
 <!-- SERVICES -->
@@ -912,9 +912,16 @@ footer {
             <p id="r-date"></p>
           </div>
           <div class="result-body" id="r-body"></div>
-          <div class="result-total">
-            <span>Estimation totale</span>
-            <span id="r-total"></span>
+          <div class="result-total" style="flex-direction:column;align-items:stretch;gap:6px;">
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-2);">
+              <span>Montant HT</span><span id="r-ht"></span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:0.85rem;color:var(--text-2);">
+              <span>TVA 20%</span><span id="r-tva"></span>
+            </div>
+            <div style="display:flex;justify-content:space-between;border-top:1px solid rgba(27,79,216,0.2);padding-top:6px;margin-top:2px;">
+              <span style="font-weight:700;">Total TTC</span><span id="r-total" style="font-size:1.3rem;font-weight:800;color:var(--blue);"></span>
+            </div>
           </div>
           <div class="result-disclaimer">* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place.</div>
           <div class="result-cta">
@@ -1172,9 +1179,16 @@ function generateDevis() {
     String(now.getMonth()+1).padStart(2,'0') +
     String(now.getDate()).padStart(2,'0') + '-' +
     String(Math.floor(Math.random()*900)+100);
-  const total = min.toLocaleString('fr-FR') + '€ – ' + max.toLocaleString('fr-FR') + '€';
+  const tvaMin = Math.round(min * 0.20);
+  const tvaMax = Math.round(max * 0.20);
+  const ttcMin = min + tvaMin;
+  const ttcMax = max + tvaMax;
 
-  currentDevis = { type, urgence, prenom, tel, email, ville, desc, surface, dateSouh, min, max, total, devisNum, date: now };
+  const totalHT  = min.toLocaleString('fr-FR') + '€ – ' + max.toLocaleString('fr-FR') + '€';
+  const totalTVA = tvaMin.toLocaleString('fr-FR') + '€ – ' + tvaMax.toLocaleString('fr-FR') + '€';
+  const totalTTC = ttcMin.toLocaleString('fr-FR') + '€ – ' + ttcMax.toLocaleString('fr-FR') + '€';
+
+  currentDevis = { type, urgence, prenom, tel, email, ville, desc, surface, dateSouh, min, max, ttcMin, ttcMax, totalHT, totalTVA, totalTTC, devisNum, date: now };
 
   document.getElementById('r-date').textContent =
     `Estimé le ${now.toLocaleDateString('fr-FR')} à ${now.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} — Réf. ${devisNum}`;
@@ -1189,7 +1203,9 @@ function generateDevis() {
     html += `<div class="result-line" style="font-style:italic;color:var(--text-2)"><span>💬 ${desc}</span></div>`;
 
   document.getElementById('r-body').innerHTML = html;
-  document.getElementById('r-total').textContent = total;
+  document.getElementById('r-ht').textContent  = totalHT;
+  document.getElementById('r-tva').textContent = totalTVA;
+  document.getElementById('r-total').textContent = totalTTC;
 
   const btnEmail = document.getElementById('btn-send-email');
   btnEmail.disabled = false;
@@ -1301,14 +1317,26 @@ function downloadPDF() {
     y += 8;
   }
 
-  // Total
+  // HT / TVA / TTC
   y += 3;
-  doc.setFillColor(238,243,255);
-  doc.setDrawColor(...BLUE);
+  doc.setFillColor(...LIGHT); doc.setDrawColor(226,232,240);
+  doc.rect(14, y, W-28, 8, 'FD');
+  doc.setTextColor(...GREY); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
+  doc.text('Montant HT', 19, y+5.5);
+  doc.text(d.totalHT, W-18, y+5.5, {align:'right'});
+  y += 8;
+
+  doc.setFillColor(...LIGHT);
+  doc.rect(14, y, W-28, 8, 'FD');
+  doc.text('TVA 20%', 19, y+5.5);
+  doc.text(d.totalTVA, W-18, y+5.5, {align:'right'});
+  y += 8;
+
+  doc.setFillColor(238,243,255); doc.setDrawColor(...BLUE);
   doc.rect(14, y, W-28, 13, 'FD');
   doc.setTextColor(...BLUE); doc.setFont('helvetica','bold'); doc.setFontSize(11);
-  doc.text('ESTIMATION TOTALE', 19, y+9);
-  doc.text(d.total, W-18, y+9, {align:'right'});
+  doc.text('TOTAL TTC', 19, y+9);
+  doc.text(d.totalTTC, W-18, y+9, {align:'right'});
   y += 19;
 
   // Description
@@ -1388,7 +1416,7 @@ async function sendByEmail() {
       ville:          d.ville       || '—',
       urgence:        d.urgence === 'urgent' ? 'Oui — intervention le jour même' : 'Non — sous 48–72h',
       date_souhaitee: d.dateSouh ? new Date(d.dateSouh).toLocaleDateString('fr-FR') : '—',
-      estimation:     d.total,
+      estimation:     d.totalTTC + ' TTC (dont TVA 20% : ' + d.totalTVA + ')',
       devis_number:   d.devisNum,
       date_devis:     d.date.toLocaleDateString('fr-FR')
     }, EMAILJS_PUBLIC_KEY);
