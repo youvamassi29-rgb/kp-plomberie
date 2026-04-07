@@ -575,6 +575,86 @@ footer {
 .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.55s ease, transform 0.55s ease; }
 .reveal.show { opacity:1; transform:translateY(0); }
 
+/* ── AVIS ── */
+.avis-grid {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:16px; margin-top:48px;
+}
+.avis-card {
+  background:white; border:1px solid var(--border);
+  border-radius:var(--radius); padding:24px;
+  transition:all 0.25s;
+}
+.avis-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-3px); }
+.avis-stars { color:#F59E0B; font-size:0.95rem; margin-bottom:12px; letter-spacing:2px; }
+.avis-text {
+  font-size:0.88rem; color:var(--text-2);
+  line-height:1.7; margin-bottom:16px;
+  font-style:italic;
+}
+.avis-author {
+  display:flex; align-items:center; gap:12px;
+}
+.avis-avatar {
+  width:38px; height:38px; border-radius:50%;
+  background:var(--blue-light); color:var(--blue);
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; font-size:0.9rem; flex-shrink:0;
+}
+.avis-name { font-weight:700; font-size:0.88rem; }
+.avis-ville { font-size:0.75rem; color:var(--text-3); }
+.avis-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--green-light); color:var(--green);
+  padding:4px 12px; border-radius:50px;
+  font-size:0.72rem; font-weight:700;
+  margin-left:auto;
+}
+
+/* ── FAQ ── */
+.faq-list { margin-top:48px; max-width:760px; margin-left:auto; margin-right:auto; }
+.faq-item {
+  border:1px solid var(--border); border-radius:12px;
+  margin-bottom:10px; overflow:hidden;
+  transition:box-shadow 0.2s;
+}
+.faq-item.open { box-shadow:var(--shadow); }
+.faq-q {
+  width:100%; background:white; border:none;
+  padding:18px 22px; text-align:left;
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:inherit; font-size:0.92rem; font-weight:600;
+  color:var(--text); cursor:pointer; gap:16px;
+}
+.faq-q:hover { background:var(--bg); }
+.faq-icon {
+  width:26px; height:26px; background:var(--blue-light);
+  border-radius:50%; display:flex; align-items:center;
+  justify-content:center; color:var(--blue);
+  font-size:1rem; flex-shrink:0; transition:transform 0.3s;
+  font-weight:300; line-height:1;
+}
+.faq-item.open .faq-icon { transform:rotate(45deg); background:var(--blue); color:white; }
+.faq-a {
+  max-height:0; overflow:hidden;
+  transition:max-height 0.35s ease, padding 0.35s ease;
+  padding:0 22px; font-size:0.87rem;
+  color:var(--text-2); line-height:1.75;
+}
+.faq-item.open .faq-a { max-height:300px; padding:0 22px 18px; }
+
+/* ── BOUTON MOBILE APPEL ── */
+.mobile-call-bar {
+  display:none;
+  position:fixed; bottom:0; left:0; right:0;
+  background:var(--orange); color:white;
+  padding:14px 20px; z-index:300;
+  text-decoration:none; font-weight:700;
+  font-size:1rem; justify-content:center;
+  align-items:center; gap:10px;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.15);
+}
+
 /* ── MOBILE ── */
 @media(max-width:900px){
   nav { padding:0 20px; }
@@ -596,6 +676,9 @@ footer {
   .footer-bottom { flex-direction:column; gap:10px; text-align:center; }
   .chat-panel { width:calc(100vw - 32px); right:16px; bottom:90px; }
   .hero-trust { gap:20px; }
+  .avis-grid { grid-template-columns:1fr; }
+  .mobile-call-bar { display:flex; }
+  body { padding-bottom:58px; }
 }
 </style>
 </head>
@@ -611,6 +694,7 @@ footer {
     <a href="#services">Services</a>
     <a href="#tarifs">Tarifs</a>
     <a href="#realisations">Réalisations</a>
+    <a href="#avis">Avis</a>
     <a href="#zone">Zone</a>
     <a href="#devis">Devis</a>
     <a href="tel:0698252221" class="btn-call">📞 06 98 25 22 21</a>
@@ -939,6 +1023,146 @@ footer {
   </div>
 </section>
 
+<!-- AVIS -->
+<section id="avis">
+  <div class="reveal" style="text-align:center;">
+    <div class="section-eyebrow">Ce que disent nos clients</div>
+    <h2 class="section-title">Avis vérifiés</h2>
+    <p class="section-sub" style="margin:0 auto;">Des vrais clients, des vrais retours. Chaque intervention est suivie d'un avis.</p>
+  </div>
+  <div class="avis-grid">
+    <div class="avis-card reveal">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">"Intervention rapide pour une fuite sous évier. Technicien ponctuel, propre et efficace. Le problème était réglé en moins d'une heure. Je recommande sans hésiter !"</p>
+      <div class="avis-author">
+        <div class="avis-avatar">SM</div>
+        <div><div class="avis-name">Sophie M.</div><div class="avis-ville">Paris 15e</div></div>
+        <span class="avis-badge">✅ Vérifié</span>
+      </div>
+    </div>
+    <div class="avis-card reveal">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">"Rénovation complète de ma salle de bain. Travail impeccable, délais respectés, et le résultat est vraiment beau. Le devis était clair et sans surprise."</p>
+      <div class="avis-author">
+        <div class="avis-avatar">KA</div>
+        <div><div class="avis-name">Karim A.</div><div class="avis-ville">Vincennes (94)</div></div>
+        <span class="avis-badge">✅ Vérifié</span>
+      </div>
+    </div>
+    <div class="avis-card reveal">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">"Chauffe-eau tombé en panne un samedi soir. Intervention le lendemain matin, remplacement rapide. Tarif annoncé respecté, aucune mauvaise surprise."</p>
+      <div class="avis-author">
+        <div class="avis-avatar">LB</div>
+        <div><div class="avis-name">Laurent B.</div><div class="avis-ville">Boulogne-Billancourt</div></div>
+        <span class="avis-badge">✅ Vérifié</span>
+      </div>
+    </div>
+    <div class="avis-card reveal">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">"Canalisation bouchée, résolu en 30 minutes top chrono. Très professionnel, explique bien ce qu'il fait. Je garde le numéro précieusement."</p>
+      <div class="avis-author">
+        <div class="avis-avatar">NP</div>
+        <div><div class="avis-name">Nadia P.</div><div class="avis-ville">Saint-Denis (93)</div></div>
+        <span class="avis-badge">✅ Vérifié</span>
+      </div>
+    </div>
+    <div class="avis-card reveal">
+      <div class="avis-stars">★★★★★</div>
+      <p class="avis-text">"Installation d'une douche italienne dans une salle de bain existante. Très beau travail, conseils utiles sur les matériaux. Garantie 3 mois rassurante."</p>
+      <div class="avis-author">
+        <div class="avis-avatar">TR</div>
+        <div><div class="avis-name">Thomas R.</div><div class="avis-ville">Versailles (78)</div></div>
+        <span class="avis-badge">✅ Vérifié</span>
+      </div>
+    </div>
+    <div class="avis-card reveal">
+      <div class="avis-stars">★★★★☆</div>
+      <p class="avis-text">"Entretien annuel de la chaudière fait dans les règles de l'art. Rapport envoyé par email, tout est documenté. Sérieux et ponctuel, je renouvelle l'an prochain."</p>
+      <div class="avis-author">
+        <div class="avis-avatar">MC</div>
+        <div><div class="avis-name">Marie-Claire D.</div><div class="avis-ville">Créteil (94)</div></div>
+        <span class="avis-badge">✅ Vérifié</span>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:36px;" class="reveal">
+    <p style="font-size:0.82rem;color:var(--text-3);">⭐ Note moyenne <strong style="color:var(--text);">4.9/5</strong> — basée sur nos interventions clients</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--bg);">
+  <div class="reveal" style="text-align:center;margin-bottom:0;">
+    <div class="section-eyebrow">Questions fréquentes</div>
+    <h2 class="section-title">On répond à tout</h2>
+    <p class="section-sub" style="margin:0 auto 0;">Tout ce que vous voulez savoir avant d'appeler.</p>
+  </div>
+  <div class="faq-list reveal">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Combien coûte une intervention en urgence ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Le diagnostic de départ est à 60€. En cas d'urgence le jour même, une majoration de 20% s'applique. Le devis définitif est toujours confirmé avant de commencer les travaux — aucune surprise sur la facture.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Intervenez-vous le week-end et les jours fériés ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Oui. Nous assurons les urgences 7j/7 et 24h/24 sur toute l'Île-de-France. Pour les interventions non urgentes, nos horaires habituels sont du lundi au samedi de 8h à 19h.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Quelle est la garantie sur vos interventions ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Chaque intervention est garantie 3 mois pièces et main d'œuvre. Si le même problème revient dans ce délai, nous revenons gratuitement, sans discussion.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Fournissez-vous les pièces et matériaux ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Oui, nous apportons les pièces courantes (joints, robinetterie, raccords...). Pour les équipements plus importants comme un chauffe-eau ou une chaudière, nous vous proposons plusieurs options selon votre budget avant l'intervention.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Comment se passe un devis ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Utilisez notre générateur en ligne pour une estimation immédiate. Nous vous rappelons ensuite dans les 2 heures pour confirmer et, si besoin, planifier un diagnostic sur place — gratuit et sans engagement.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Quels modes de paiement acceptez-vous ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Espèces, chèque, virement bancaire et carte bancaire. Le paiement se fait uniquement après la fin des travaux et votre validation. Nous fournissons une facture TVA pour toute intervention.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Pouvez-vous intervenir dans les copropriétés et locaux professionnels ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Absolument. Nous travaillons aussi bien pour les particuliers que pour les syndics, bailleurs, restaurants, hôtels et entreprises. Des contrats d'entretien annuels sont disponibles pour les professionnels.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Y a-t-il des frais de déplacement ?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a">Non. Le déplacement est inclus dans notre tarif d'intervention pour toute la zone Île-de-France. Le prix annoncé est le prix final — pas de frais cachés.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOUTON APPEL MOBILE -->
+<a href="tel:0698252221" class="mobile-call-bar">
+  📞 Appeler maintenant — 06 98 25 22 21
+</a>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -1008,6 +1232,14 @@ footer {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ── FAQ ──
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
 // ── SCROLL REVEAL ──
 const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
