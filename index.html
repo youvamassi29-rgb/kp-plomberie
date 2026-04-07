@@ -575,6 +575,61 @@ footer {
 .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.55s ease, transform 0.55s ease; }
 .reveal.show { opacity:1; transform:translateY(0); }
 
+/* ── COMPTEURS ── */
+.counters-band {
+  background: linear-gradient(135deg, #1340B8 0%, #1B4FD8 100%);
+  padding: 56px 64px;
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 32px; text-align: center;
+}
+.counter-item {}
+.counter-num {
+  font-size: 2.8rem; font-weight: 800;
+  color: white; letter-spacing: -2px; line-height: 1;
+  margin-bottom: 8px;
+}
+.counter-num span { color: #93C5FD; }
+.counter-label {
+  font-size: 0.82rem; color: rgba(255,255,255,0.65);
+  font-weight: 500; line-height: 1.4;
+}
+
+/* ── POURQUOI K&P ── */
+.pourquoi-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; margin-top: 48px;
+}
+.pourquoi-list { display: flex; flex-direction: column; gap: 16px; }
+.pourquoi-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  background: white; border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 22px;
+  transition: all 0.25s;
+}
+.pourquoi-item:hover { border-color: var(--blue); box-shadow: var(--shadow); transform: translateX(4px); }
+.pourquoi-icon {
+  width: 44px; height: 44px; background: var(--blue-light);
+  border-radius: 12px; display: flex; align-items: center;
+  justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+}
+.pourquoi-item h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 3px; }
+.pourquoi-item p { font-size: 0.82rem; color: var(--text-2); line-height: 1.6; }
+.pourquoi-vs {
+  background: var(--blue); border-radius: var(--radius);
+  padding: 32px; color: white;
+}
+.pourquoi-vs h3 { font-size: 1rem; font-weight: 800; margin-bottom: 20px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; }
+.vs-row {
+  display: flex; justify-content: space-between;
+  align-items: center; padding: 11px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.85rem;
+}
+.vs-row:last-child { border: none; }
+.vs-label { color: rgba(255,255,255,0.75); }
+.vs-kp { color: #86EFAC; font-weight: 700; }
+.vs-other { color: rgba(255,255,255,0.35); text-decoration: line-through; font-size: 0.78rem; }
+
 /* ── AVIS ── */
 .avis-grid {
   display:grid; grid-template-columns:repeat(3,1fr);
@@ -677,6 +732,8 @@ footer {
   .chat-panel { width:calc(100vw - 32px); right:16px; bottom:90px; }
   .hero-trust { gap:20px; }
   .avis-grid { grid-template-columns:1fr; }
+  .counters-band { grid-template-columns:repeat(2,1fr); padding:40px 20px; gap:24px; }
+  .pourquoi-grid { grid-template-columns:1fr; }
   .mobile-call-bar { display:flex; }
   body { padding-bottom:58px; }
 }
@@ -737,6 +794,96 @@ footer {
   <div class="trust-bar-item"><span>⚡</span><span>Intervention rapide en IDF</span></div>
   <div class="trust-bar-item"><span>💬</span><span>Assistance disponible 24h/24</span></div>
 </div>
+
+<!-- COMPTEURS -->
+<div class="counters-band">
+  <div class="counter-item reveal">
+    <div class="counter-num" data-target="350">0<span>+</span></div>
+    <div class="counter-label">Interventions<br>réalisées</div>
+  </div>
+  <div class="counter-item reveal">
+    <div class="counter-num" data-target="98">0<span>%</span></div>
+    <div class="counter-label">Clients<br>satisfaits</div>
+  </div>
+  <div class="counter-item reveal">
+    <div class="counter-num" data-target="8">0</div>
+    <div class="counter-label">Départements<br>couverts</div>
+  </div>
+  <div class="counter-item reveal">
+    <div class="counter-num" data-target="3" data-suffix=" mois">0</div>
+    <div class="counter-label">Garantie<br>incluse</div>
+  </div>
+</div>
+
+<!-- POURQUOI K&P -->
+<section id="pourquoi">
+  <div class="pourquoi-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Notre différence</div>
+      <h2 class="section-title">Pourquoi choisir<br>K&amp;P ?</h2>
+      <p class="section-sub" style="margin-bottom:32px;">Spécialisés dans <strong>tous types de rénovation</strong>, y compris la plomberie — du dépannage d'urgence à la transformation complète de votre intérieur. Un seul interlocuteur, un résultat soigné.</p>
+      <div class="pourquoi-list">
+        <div class="pourquoi-item">
+          <div class="pourquoi-icon">🏗️</div>
+          <div><h4>Rénovation tous corps d'état</h4><p>Salle de bain, cuisine, plomberie neuve, carrelage, sanitaires — on gère l'ensemble du projet, pas juste la tuyauterie.</p></div>
+        </div>
+        <div class="pourquoi-item">
+          <div class="pourquoi-icon">💬</div>
+          <div><h4>Un seul interlocuteur</h4><p>Pas de sous-traitants, pas de relais. Vous parlez directement avec celui qui intervient chez vous.</p></div>
+        </div>
+        <div class="pourquoi-item">
+          <div class="pourquoi-icon">📋</div>
+          <div><h4>Devis transparent, prix ferme</h4><p>Le prix annoncé est le prix payé. Aucun supplément surprise après l'intervention.</p></div>
+        </div>
+        <div class="pourquoi-item">
+          <div class="pourquoi-icon">🛡️</div>
+          <div><h4>Garantie 3 mois systématique</h4><p>Sur chaque intervention, sans exception. Si ça revient, on revient — gratuitement.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="pourquoi-vs">
+        <h3>K&amp;P vs plombier classique</h3>
+        <div class="vs-row">
+          <span class="vs-label">Rénovation complète</span>
+          <span class="vs-kp">✅ Oui</span>
+          <span class="vs-other">Non</span>
+        </div>
+        <div class="vs-row">
+          <span class="vs-label">Devis en ligne instantané</span>
+          <span class="vs-kp">✅ Oui</span>
+          <span class="vs-other">Non</span>
+        </div>
+        <div class="vs-row">
+          <span class="vs-label">Prix transparents affichés</span>
+          <span class="vs-kp">✅ Oui</span>
+          <span class="vs-other">Rarement</span>
+        </div>
+        <div class="vs-row">
+          <span class="vs-label">Garantie systématique</span>
+          <span class="vs-kp">✅ 3 mois</span>
+          <span class="vs-other">Variable</span>
+        </div>
+        <div class="vs-row">
+          <span class="vs-label">Disponible 7j/7</span>
+          <span class="vs-kp">✅ Oui</span>
+          <span class="vs-other">Parfois</span>
+        </div>
+        <div class="vs-row">
+          <span class="vs-label">Frais de déplacement</span>
+          <span class="vs-kp">✅ Inclus</span>
+          <span class="vs-other">En supplément</span>
+        </div>
+        <div class="vs-row">
+          <span class="vs-label">Facture TVA fournie</span>
+          <span class="vs-kp">✅ Toujours</span>
+          <span class="vs-other">Pas toujours</span>
+        </div>
+      </div>
+      <a href="#devis" class="btn-primary" style="width:100%;justify-content:center;margin-top:16px;">Obtenir un devis gratuit →</a>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICES -->
 <section id="services">
@@ -1232,6 +1379,34 @@ footer {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+// ── COMPTEURS ANIMÉS ──
+const counterObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(!entry.isIntersecting) return;
+    const el = entry.target.querySelector('.counter-num');
+    if(!el || el.dataset.done) return;
+    el.dataset.done = '1';
+    const target = parseInt(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const plus = el.innerHTML.includes('+') ? '+' : '';
+    const pct  = el.innerHTML.includes('%') ? '%' : '';
+    const end  = plus || pct || suffix;
+    let start = 0;
+    const duration = 1600;
+    const step = timestamp => {
+      if(!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(ease * target) + end;
+      if(progress < 1) requestAnimationFrame(step);
+      else el.textContent = target + end;
+    };
+    requestAnimationFrame(step);
+    counterObserver.unobserve(entry.target);
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter-item').forEach(el => counterObserver.observe(el));
+
 // ── FAQ ──
 function toggleFaq(btn) {
   const item = btn.parentElement;
