@@ -1935,6 +1935,39 @@ function aiAddBubble(text, type, withTyping) {
   return el;
 }
 
+function analyzeDescription(desc, prenom) {
+  const d = desc.toLowerCase();
+  const nom = prenom ? prenom.split(' ')[0] : '';
+
+  // Détection urgence
+  const urgent = /urgent|urgence|inond|débord|eau partout|catastrophe|maintenant|aujourd'hui|vite/.test(d);
+
+  // Détection ville (simplifié)
+  const villeMatch = d.match(/\b(paris|boulogne|vincennes|versailles|créteil|saint-denis|argenteuil|nanterre|montreuil|ivry|vitry|courbevoie|levallois|cergy|meaux|melun)\b/i);
+  const ville = villeMatch ? villeMatch[1] : '';
+
+  // Détection type
+  let type, label;
+  if(/chauffe.eau|ballon|cumulus|eau chaude/.test(d))         { type='chauffe-eau';         label='Remplacement chauffe-eau'; }
+  else if(/chaudière|condensation|gaz|fioul/.test(d))         { type='chaudiere-entretien'; label='Entretien / réparation chaudière'; }
+  else if(/installe?.*chaudière|nouvelle chaudière/.test(d))  { type='chaudiere-install';   label='Installation chaudière'; }
+  else if(/débouche|bouché|bouchée|évier|wc.*bouchée?|canalisation/.test(d)) { type='debouchage'; label='Débouchage canalisation'; }
+  else if(/fuite|fui|goutte|humidité|infiltr|dégât des eaux/.test(d)) { type='fuite'; label='Recherche et réparation de fuite'; }
+  else if(/salle de bain.*complet|refaire.*salle|rénov.*complet/.test(d)) { type='sdb-complete'; label='Rénovation complète salle de bain'; }
+  else if(/salle de bain|douche|baignoire|carrelage|italienne/.test(d)) { type='sdb-partielle'; label='Rénovation salle de bain'; }
+  else if(/wc|toilette|sanitaire/.test(d))                    { type='wc';                  label='Installation WC'; }
+  else if(/robinet|mitigeur/.test(d))                         { type='robinet';             label='Remplacement robinet/mitigeur'; }
+  else if(/contrat|entretien annuel|maintenance/.test(d))     { type='contrat';             label='Contrat entretien annuel'; }
+  else if(/plomberie neuve|construction|réseau neuf/.test(d)) { type='plomberie-neuve';     label='Plomberie neuve'; }
+  else                                                         { type='depannage';           label='Dépannage plomberie'; }
+
+  // Message de confirmation
+  const intro = nom ? `${nom}, d` : 'D';
+  let confirmation = `${intro}'après votre description, il s'agit d'une intervention : <strong>${label}</strong>${urgent ? ' en urgence' : ''}. Est-ce bien ça ?`;
+
+  return { type, label, urgent, confirmation, ville };
+}
+
 async function aiAnalyze() {
   const prenom = document.getElementById('ai-prenom').value.trim();
   const tel    = document.getElementById('ai-tel').value.trim();
@@ -1951,23 +1984,9 @@ async function aiAnalyze() {
   // Bubble loading
   const loader = aiAddBubble('', 'bot', true);
 
-  const TYPES_LIST = `depannage (fuite, panne, urgence), fuite (recherche fuite cachée), debouchage (canalisation bouchée), chauffe-eau (remplacement chauffe-eau), chaudiere-entretien (entretien chaudière annuel), chaudiere-install (installation chaudière neuve), sdb-partielle (rénovation partielle salle de bain), sdb-complete (rénovation complète salle de bain), wc (installation WC), robinet (remplacement robinet/mitigeur), contrat (contrat entretien annuel), plomberie-neuve (plomberie neuve construction)`;
-
   try {
-    const result = await window.claude.complete({
-      messages: [{
-        role: 'user',
-        content: `Tu es un expert en plomberie. Analyse cette description client et identifie le type d'intervention.\n\nDescription: "${desc}"\n\nTypes disponibles: ${TYPES_LIST}\n\nRéponds UNIQUEMENT en JSON valide avec ces champs:\n{\n  "type": "le_type_parmi_la_liste",\n  "label": "Nom court de l'intervention en français",\n  "urgent": true ou false,\n  "confirmation": "Phrase courte pour confirmer au client ce que tu as compris, en commençant par son prénom si fourni. Ex: D'après votre description, il s'agit d'une réparation de fuite. Est-ce bien ça ?",\n  "ville": "ville extraite si mentionnée ou vide"\n}`
-      }]
-    });
-
-    let parsed;
-    try {
-      const jsonMatch = result.match(/\{[\s\S]*\}/);
-      parsed = JSON.parse(jsonMatch ? jsonMatch[0] : result);
-    } catch(e) {
-      parsed = { type: 'depannage', label: 'Dépannage plomberie', urgent: false, confirmation: 'D\'après votre description, il s\'agit d\'une intervention de plomberie. Est-ce bien ça ?', ville: '' };
-    }
+    const parsed = analyzeDescription(desc, prenom);
+    await new Promise(r => setTimeout(r, 1000));
 
     aiDetectedType = parsed.type;
 
