@@ -1863,29 +1863,45 @@ async function chatSend() {
   if(!msg) return;
   field.value = ''; field.style.height = 'auto';
   appendBubble(msg, 'user');
-  chatHistory.push({ role: 'user', content: msg });
+  chatHistory.push(msg.toLowerCase());
   const loader = appendBubble('', 'bot');
   loader.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: `Tu es l'assistant virtuel de K&P Plomberie, entreprise de plomberie professionnelle en Île-de-France.\n\nTON RÔLE : Qualifier le problème, donner une estimation de prix et proposer un RDV.\n\nINFOS :\n- Téléphone : 06 98 25 22 21\n- Zone : Île-de-France (75,77,78,91,92,93,94,95)\n- Garantie : 3 mois sur chaque intervention\n- Devis : gratuit et sans engagement\n- Horaires : Lun-Sam 8h-19h, urgences 24h/24\n\nTARIFS :\n- Diagnostic : 60€ | Débouchage : 80€+ | Fuite : 90-180€\n- Robinet : 120-200€ | Chauffe-eau : 350-600€\n- Entretien chaudière : 120-180€\n- Rénovation SDB partielle : 800€+ | Complète : sur devis\n\nRÈGLES : Français, ton professionnel et sobre, max 4 phrases, urgences → 06 98 25 22 21.`,
-        messages: chatHistory
-      })
-    });
-    const data = await res.json();
-    const reply = data.content[0].text;
-    loader.remove();
-    appendBubble(reply, 'bot');
-    chatHistory.push({ role: 'assistant', content: reply });
-  } catch(err) {
-    loader.remove();
-    appendBubble('Désolé, une erreur est survenue. Appelez-nous directement au 06 98 25 22 21.', 'bot');
-  }
+  await new Promise(r => setTimeout(r, 900));
+  loader.remove();
+  appendBubble(getBotReply(msg.toLowerCase(), chatHistory), 'bot');
+}
+
+function getBotReply(msg, history) {
+  const n = history.length;
+  if(/urgent|urgence|inond|débord|eau partout|eau coule|catastrophe/.test(msg))
+    return '🚨 Urgence ! Appelez-nous immédiatement au 06 98 25 22 21 — intervention le jour même en Île-de-France.';
+  if(/fuite|fui|goutte|tuyau|humidité|infiltr|dégât des eaux/.test(msg))
+    return '💧 Réparation de fuite entre 90€ et 180€ TTC. Dans quel département êtes-vous ? Appelez le 06 98 25 22 21 pour confirmer la disponibilité.';
+  if(/bouché|bouchée|évier|wc|toilette|canalisation|débouche|évacuation/.test(msg))
+    return '🔧 Débouchage à partir de 80€ TTC, réglé en moins d\'une heure en général. Vous souhaitez une intervention aujourd\'hui ou à planifier ?';
+  if(/chauffe.eau|ballon|eau chaude|cumulus/.test(msg))
+    return '🚿 Remplacement de chauffe-eau entre 350€ et 600€ TTC, pose incluse. Quelle est la capacité de votre appareil (100L, 150L, 200L) ?';
+  if(/chaudière|chauffage|radiateur|gaz|fioul|condensation|entretien/.test(msg))
+    return '🔥 Entretien chaudière à partir de 120€ TTC. Votre chaudière est en panne ou c\'est pour l\'entretien annuel ?';
+  if(/salle de bain|douche|baignoire|carrelage|rénov|italienne|sanitaire/.test(msg))
+    return '🚿 Spécialisés tous types de rénovation, y compris la plomberie. Rénovation partielle dès 800€, complète sur devis. Quelle superficie ?';
+  if(/neuve?|construction|travaux|réseau|installation/.test(msg))
+    return '🏗️ Pour une installation complète, nous établissons un devis gratuit sur place. Appelez le 06 98 25 22 21 ou utilisez le générateur de devis.';
+  if(/prix|tarif|coût|combien|budget|devis/.test(msg))
+    return '💰 Diagnostic 60€ · débouchage 80€+ · fuite 90-180€ · chauffe-eau 350-600€ · chaudière 120-180€. Tous TTC, garantie 3 mois. Quel est votre problème ?';
+  if(/zone|vien|déplace|paris|idf|île-de-france|département/.test(msg))
+    return '📍 Nous intervenons dans tout l\'Île-de-France (75,77,78,91,92,93,94,95), déplacement inclus sans frais cachés. Quelle est votre ville ?';
+  if(/garantie|confiance|sérieux/.test(msg))
+    return '🛡️ Garantie 3 mois pièces et main d\'œuvre sur chaque intervention. Si le problème revient, nous revenons gratuitement.';
+  if(/heure|horaire|disponible|quand|week-end|samedi/.test(msg))
+    return '🕐 Lundi–Samedi 8h–19h. Urgences 24h/24 et 7j/7 : appelez le 06 98 25 22 21.';
+  if(n <= 2 && /bonjour|salut|hello|bonsoir/.test(msg))
+    return 'Bonjour ! 👋 Décrivez votre problème (fuite, bouchage, chauffe-eau, rénovation...) et je vous donne une estimation de prix immédiate.';
+  if(/merci|super|parfait|nickel|top/.test(msg))
+    return 'Avec plaisir ! 😊 Pour toute intervention, appelez le 06 98 25 22 21 ou utilisez notre générateur de devis en ligne.';
+  if(n <= 2)
+    return 'Bonjour ! 👋 Décrivez votre problème de plomberie et je vous donne une estimation de prix en quelques secondes.';
+  return 'Pour ce type de demande, appelez-nous au 📞 06 98 25 22 21 — devis gratuit sur place. Vous pouvez aussi utiliser notre générateur de devis.';
 }
 function appendBubble(text, type) {
   const msgs = document.getElementById('chatMsgs');
