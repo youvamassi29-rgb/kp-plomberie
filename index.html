@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="logo.svg">
 <title>K&amp;P Plomberie — Plombier &amp; Rénovation Île-de-France | Devis Gratuit</title>
-<meta name="description" content="K&P Plomberie : plombier et spécialiste rénovation en Île-de-France. Dépannage urgent, salle de bain, chaudière, plomberie neuve. Devis gratuit, garantie 3 mois, disponible 7j/7.">
+<meta name="description" content="K&P Plomberie : plombier et spécialiste rénovation en Île-de-France. Dépannage urgent, salle de bain, chaudière, plomberie neuve. Devis gratuit, garantie décennale, disponible 7j/7.">
 <meta name="keywords" content="plombier île-de-france, plombier paris, dépannage plomberie urgence, rénovation salle de bain, installation chaudière, plombier 75 77 78 91 92 93 94 95, devis plombier gratuit">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://kp-plomberie.fr">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kp-plomberie.fr">
 <meta property="og:title" content="K&P Plomberie — Plombier & Rénovation Île-de-France">
-<meta property="og:description" content="Dépannage urgent, rénovation complète, chaudière. Devis gratuit en ligne. Garantie 3 mois. Disponible 7j/7 sur toute l'Île-de-France.">
+<meta property="og:description" content="Dépannage urgent, rénovation complète, chaudière. Devis gratuit en ligne. Garantie décennale. Disponible 7j/7 sur toute l'Île-de-France.">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:site_name" content="K&P Plomberie">
 <script type="application/ld+json">
@@ -850,102 +850,85 @@ footer {
 .gallery-illus { position:relative; }
 
 /* ─── AI DEVIS ─── */
-.ai-devis-card {
+.devis-simple-card {
   background:var(--white); border:1px solid var(--border);
   border-radius:var(--r-lg); overflow:hidden;
-  box-shadow:0 4px 40px oklch(11% 0.012 60 / .07);
+  box-shadow:0 4px 40px rgba(0,0,0,0.07);
 }
-.ai-devis-top {
-  background:var(--navy); padding:28px 32px;
+.dv-header {
+  background:var(--navy); padding:24px 32px;
   display:flex; align-items:center; gap:14px;
 }
-.ai-devis-avatar {
+.dv-header-icon {
   width:40px; height:40px; border-radius:var(--r);
-  background:oklch(99% 0.003 75 / .1);
-  border:1px solid oklch(99% 0.003 75 / .15);
+  background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15);
   display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
+  font-size:1.2rem; flex-shrink:0;
 }
-.ai-devis-avatar svg { width:18px; height:18px; fill:var(--gold); }
-.ai-devis-name {
-  font-family:'Playfair Display',serif;
-  font-weight:700; color:var(--white); font-size:0.95rem;
+.dv-header-title { font-family:'Playfair Display',serif; font-weight:700; color:var(--white); font-size:0.95rem; }
+.dv-header-sub { font-size:0.7rem; color:var(--gold); letter-spacing:0.5px; }
+.dv-body { padding:28px 32px; }
+.dv-progress { display:flex; gap:6px; margin-bottom:20px; }
+.dv-dot { width:8px; height:8px; border-radius:50%; background:var(--border); transition:background .3s; }
+.dv-dot.active { background:var(--gold); }
+.dv-step-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:600; color:var(--ink); margin-bottom:18px; }
+.dv-types { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.dv-type-btn {
+  display:flex; align-items:center; gap:10px;
+  padding:13px 14px; border:1.5px solid var(--border);
+  border-radius:var(--r); background:var(--white);
+  cursor:pointer; font-family:'Inter',sans-serif;
+  font-size:0.82rem; font-weight:500; color:var(--ink);
+  text-align:left; transition:all .2s;
 }
-.ai-devis-status { font-size:0.7rem; color:var(--gold); letter-spacing:0.5px; }
-.ai-devis-body { padding:28px 32px; }
-
-/* Chat bubbles */
-.ai-msgs {
-  display:flex; flex-direction:column; gap:14px;
-  margin-bottom:20px; min-height:60px;
+.dv-type-btn:hover { border-color:var(--gold); background:var(--gold-pale); color:var(--gold-2); }
+.dv-type-icon { font-size:1.2rem; flex-shrink:0; }
+.dv-selected-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--gold-pale); border:1px solid var(--gold);
+  border-radius:20px; padding:6px 14px;
+  font-size:0.82rem; color:var(--gold-2); font-weight:500;
+  margin-bottom:16px;
 }
-.ai-bubble {
-  max-width:92%; padding:12px 16px;
-  border-radius:var(--r-lg); font-size:0.875rem; line-height:1.65;
+.dv-form { display:flex; flex-direction:column; gap:12px; }
+.dv-form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.dv-form input {
+  width:100%; padding:12px 16px; border:1.5px solid var(--border);
+  border-radius:var(--r); font-family:'Inter',sans-serif;
+  font-size:0.875rem; color:var(--ink); background:var(--cream);
+  outline:none; transition:border-color .2s; box-sizing:border-box;
 }
-.ai-bubble.bot {
-  background:var(--cream); color:var(--ink);
-  align-self:flex-start; border-bottom-left-radius:2px;
-  border:1px solid var(--border);
+.dv-form input:focus { border-color:var(--gold); background:var(--white); }
+.dv-form input::placeholder { color:var(--muted); }
+.dv-result-box {
+  background:var(--gold-pale); border:1px solid var(--gold);
+  border-radius:var(--r); padding:20px; margin-bottom:16px;
 }
-.ai-bubble.user {
-  background:var(--navy); color:white;
-  align-self:flex-end; border-bottom-right-radius:2px;
-  font-family:'Playfair Display',serif; font-style:italic;
+.dv-price-line {
+  display:flex; justify-content:space-between; padding:7px 0;
+  font-size:0.875rem; color:var(--muted);
+  border-bottom:1px solid rgba(0,0,0,0.05);
 }
-.ai-bubble .typing-dots { display:flex; gap:4px; align-items:center; padding:2px 0; }
-.ai-bubble .typing-dots span {
-  width:5px; height:5px; background:var(--muted);
-  border-radius:50%; animation:dot 1.2s infinite;
+.dv-price-line:last-child { border:none; }
+.dv-price-total {
+  display:flex; justify-content:space-between; align-items:baseline;
+  padding-top:12px; margin-top:4px; font-weight:700;
 }
-.ai-bubble .typing-dots span:nth-child(2){animation-delay:.2s}
-.ai-bubble .typing-dots span:nth-child(3){animation-delay:.4s}
-
-/* Confirm buttons */
-.ai-confirm-btns {
-  display:flex; gap:10px; margin-top:4px; flex-wrap:wrap;
+.dv-price-total span:first-child { font-size:0.9rem; color:var(--ink); }
+.dv-price-total span:last-child { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold-2); }
+.dv-callback-box {
+  background:var(--navy); border-radius:var(--r);
+  padding:20px; text-align:center; margin-bottom:16px;
 }
-.ai-confirm-btn {
-  padding:8px 20px; border-radius:var(--r);
-  font-family:'Inter',sans-serif; font-size:0.82rem; font-weight:500;
-  cursor:pointer; transition:all .2s; border:1px solid var(--border);
-  background:var(--white); color:var(--ink);
+.dv-callback-icon { font-size:1.4rem; margin-bottom:8px; }
+.dv-callback-text { color:var(--white); font-size:0.875rem; line-height:1.6; }
+.dv-callback-text strong { color:var(--gold); }
+.dv-back-btn {
+  background:none; border:none; color:var(--muted);
+  font-size:0.8rem; cursor:pointer;
+  font-family:'Inter',sans-serif; text-decoration:underline; padding:0;
 }
-.ai-confirm-btn.yes { background:var(--navy); color:var(--white); border-color:var(--navy); }
-.ai-confirm-btn.yes:hover { background:var(--navy-2); }
-.ai-confirm-btn.no:hover { border-color:var(--gold); color:var(--gold); }
-
-/* Input area */
-.ai-input-area {
-  border-top:1px solid var(--border);
-  padding:16px 0 0; display:flex; flex-direction:column; gap:10px;
-}
-.ai-textarea {
-  width:100%; border:1.5px solid var(--border);
-  border-radius:var(--r); padding:13px 16px;
-  font-family:'Inter',sans-serif; font-size:0.9rem;
-  color:var(--ink); background:var(--cream);
-  resize:none; outline:none; line-height:1.6;
-  transition:border .2s, background .2s;
-  min-height:90px;
-}
-.ai-textarea:focus { border-color:var(--gold); background:var(--white); }
-.ai-textarea::placeholder { color:oklch(65% 0.01 60); }
-.ai-send-row {
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-}
-.ai-contact-fields {
-  display:grid; grid-template-columns:1fr 1fr; gap:10px;
-  margin-bottom:12px;
-}
-.ai-contact-fields input {
-  border:1.5px solid var(--border); border-radius:var(--r);
-  padding:11px 14px; font-family:'Inter',sans-serif; font-size:0.875rem;
-  color:var(--ink); background:var(--cream); outline:none;
-  transition:border .2s; width:100%;
-}
-.ai-contact-fields input:focus { border-color:var(--gold); background:var(--white); }
-.ai-contact-fields input::placeholder { color:oklch(65% 0.01 60); }
+.dv-disclaimer { font-size:0.72rem; color:var(--muted); text-align:center; margin-top:8px; font-weight:300; }
 
 /* ─── REVEAL ─── */
 .reveal { opacity:0; transform:translateY(24px); transition:opacity .6s ease, transform .6s ease; }
@@ -1146,7 +1129,7 @@ footer {
       Artisan Plombier · Île-de-France
     </div>
     <h1>L'excellence<br>de l'artisanat<br>au service de<br>votre <em>domicile.</em></h1>
-    <p class="hero-sub">Du dépannage d'urgence à la rénovation complète — K&amp;P Plomberie intervient partout en Île-de-France avec rigueur, transparence et garantie 3 mois systématique.</p>
+    <p class="hero-sub">Du dépannage d'urgence à la rénovation complète — K&amp;P Plomberie intervient partout en Île-de-France avec rigueur, transparence et garantie décennale.</p>
     <div class="hero-actions">
       <a href="tel:0698252221" class="btn-gold">
         Appeler maintenant &nbsp;·&nbsp; 06 98 25 22 21
@@ -1155,8 +1138,8 @@ footer {
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="stat-val">3 mois</div>
-        <div class="stat-label">Garantie incluse</div>
+        <div class="stat-val">10 ans</div>
+        <div class="stat-label">Garantie décennale</div>
       </div>
       <div class="hero-stat">
         <div class="stat-val">8</div>
@@ -1177,8 +1160,8 @@ footer {
 <!-- COUNTERS BAND -->
 <div class="counters-band">
   <div class="counter-item reveal">
-    <div class="counter-num" data-target="3" data-suffix=" mois">3 mois</div>
-    <div class="counter-label">Garantie<br>systématique</div>
+    <div class="counter-num" data-target="10" data-suffix=" ans">10 ans</div>
+    <div class="counter-label">Garantie<br>décennale</div>
   </div>
   <div class="counter-item reveal">
     <div class="counter-num" data-target="8">8</div>
@@ -1227,8 +1210,8 @@ footer {
         <div class="pourquoi-item">
           <div class="pi-num">04</div>
           <div class="pi-body">
-            <h4>Garantie 3 mois systématique</h4>
-            <p>Sur chaque intervention, sans exception. Si ça revient dans les 3 mois, on revient — gratuitement.</p>
+            <h4>Garantie décennale</h4>
+            <p>Assurance professionnelle décennale sur tous nos travaux. Vous êtes couverts 10 ans — c'est notre engagement.</p>
           </div>
         </div>
       </div>
@@ -1244,7 +1227,7 @@ footer {
         <div class="vs-row"><span class="vs-label">Rénovation complète</span><span class="vs-kp">Inclus</span><span class="vs-other">Non proposé</span></div>
         <div class="vs-row"><span class="vs-label">Devis en ligne immédiat</span><span class="vs-kp">Oui</span><span class="vs-other">Non</span></div>
         <div class="vs-row"><span class="vs-label">Prix transparents affichés</span><span class="vs-kp">Toujours</span><span class="vs-other">Rarement</span></div>
-        <div class="vs-row"><span class="vs-label">Garantie systématique</span><span class="vs-kp">3 mois</span><span class="vs-other">Variable</span></div>
+        <div class="vs-row"><span class="vs-label">Garantie décennale</span><span class="vs-kp">Oui</span><span class="vs-other">Non</span></div>
         <div class="vs-row"><span class="vs-label">Disponible 7j/7</span><span class="vs-kp">Oui</span><span class="vs-other">Parfois</span></div>
         <div class="vs-row"><span class="vs-label">Frais de déplacement</span><span class="vs-kp">0 €</span><span class="vs-other">En supplément</span></div>
         <div class="vs-row"><span class="vs-label">Facture TVA fournie</span><span class="vs-kp">Toujours</span><span class="vs-other">Pas toujours</span></div>
@@ -1318,8 +1301,8 @@ footer {
     </div>
     <div class="guarantee-box">
       <div class="section-label" style="margin-bottom:16px;"><span class="section-label-line"></span> Garantie</div>
-      <h4>Satisfaction garantie 3 mois</h4>
-      <p>Chaque intervention est garantie <strong>3 mois</strong> pièces et main d'œuvre. Si le problème revient dans ce délai, nous revenons gratuitement, sans discussion.</p>
+      <h4>Garantie décennale incluse</h4>
+      <p>Tous nos travaux sont couverts par notre <strong>assurance décennale</strong> — 10 ans de couverture sur les défauts importants. Pièces et main d'œuvre garanties. Si un problème survient, nous revenons gratuitement.</p>
     </div>
   </div>
   <div class="tarifs-grid reveal">
@@ -1676,7 +1659,7 @@ footer {
         </div>
         <div class="devis-step">
           <div class="step-num">2</div>
-          <div class="step-body"><h4>Estimation immédiate</h4><p>Le prix s'affiche instantanément, téléchargeable en PDF.</p></div>
+          <div class="step-body"><h4>Estimation immédiate</h4><p>Le prix s'affiche instantanément avec TVA 20%.</p></div>
         </div>
         <div class="devis-step">
           <div class="step-num">3</div>
@@ -1685,64 +1668,79 @@ footer {
       </div>
     </div>
     <div class="reveal">
-      <div class="ai-devis-card">
-        <div class="ai-devis-top">
-          <div class="ai-devis-avatar">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z" opacity=".3"/><path d="M21 6.5h-3v-2c0-.83-.67-1.5-1.5-1.5h-9C6.67 3 6 3.67 6 4.5v2H3c-.83 0-1.5.67-1.5 1.5v10c0 .83.67 1.5 1.5 1.5h18c.83 0 1.5-.67 1.5-1.5V8c0-.83-.67-1.5-1.5-1.5zM9 4.5h6v2H9v-2zm12 13.5H3V8h18v10z"/></svg>
-          </div>
+      <div class="devis-simple-card">
+        <div class="dv-header">
+          <div class="dv-header-icon">🔧</div>
           <div>
-            <div class="ai-devis-name">Estimateur K&amp;P</div>
-            <div class="ai-devis-status">Décrivez votre problème, on génère votre devis</div>
+            <div class="dv-header-title">Estimateur K&amp;P</div>
+            <div class="dv-header-sub">Devis gratuit · Sans engagement</div>
           </div>
         </div>
-        <div class="ai-devis-body">
-          <div class="ai-msgs" id="aiMsgs">
-            <div class="ai-bubble bot">Bonjour ! Décrivez-moi votre problème de plomberie en quelques mots — je vais analyser votre demande et vous préparer une estimation personnalisée.</div>
-          </div>
 
-          <div id="aiInputArea" class="ai-input-area">
-            <div class="ai-contact-fields">
-              <input type="text" id="ai-prenom" placeholder="Votre prénom">
-              <input type="tel" id="ai-tel" placeholder="Téléphone — 06 XX XX XX XX">
+        <!-- Étape 1 : Type d'intervention -->
+        <div id="dv-step1" class="dv-body">
+          <div class="dv-progress">
+            <div class="dv-dot active"></div><div class="dv-dot"></div><div class="dv-dot"></div>
+          </div>
+          <div class="dv-step-title">Quel est votre problème ?</div>
+          <div class="dv-types">
+            <button class="dv-type-btn" onclick="dvSelectType('fuite')"><span class="dv-type-icon">💧</span>Fuite d'eau</button>
+            <button class="dv-type-btn" onclick="dvSelectType('debouchage')"><span class="dv-type-icon">🔩</span>Débouchage</button>
+            <button class="dv-type-btn" onclick="dvSelectType('chauffe-eau')"><span class="dv-type-icon">🌊</span>Chauffe-eau</button>
+            <button class="dv-type-btn" onclick="dvSelectType('chaudiere')"><span class="dv-type-icon">🔥</span>Chaudière</button>
+            <button class="dv-type-btn" onclick="dvSelectType('robinet')"><span class="dv-type-icon">🪛</span>Robinetterie</button>
+            <button class="dv-type-btn" onclick="dvSelectType('sdb')"><span class="dv-type-icon">🛁</span>Salle de bain</button>
+            <button class="dv-type-btn" onclick="dvSelectType('wc')"><span class="dv-type-icon">🚽</span>WC / Sanitaires</button>
+            <button class="dv-type-btn" onclick="dvSelectType('autre')"><span class="dv-type-icon">⚡</span>Urgence / Autre</button>
+          </div>
+        </div>
+
+        <!-- Étape 2 : Coordonnées -->
+        <div id="dv-step2" class="dv-body" style="display:none">
+          <div class="dv-progress">
+            <div class="dv-dot active"></div><div class="dv-dot active"></div><div class="dv-dot"></div>
+          </div>
+          <div id="dv-badge2"></div>
+          <div class="dv-step-title">Vos coordonnées</div>
+          <div class="dv-form">
+            <div class="dv-form-row">
+              <input type="text" id="dv-prenom" placeholder="Prénom *">
+              <input type="tel" id="dv-tel" placeholder="Téléphone *">
             </div>
-            <textarea class="ai-textarea" id="aiProblem" placeholder="Ex : J'ai une fuite sous mon évier depuis ce matin, l'eau coule lentement mais ça s'aggrave. Je suis à Paris 15e..."></textarea>
-            <div class="ai-send-row">
-              <span style="font-size:0.75rem;color:var(--muted);font-weight:300;">Rappel sous 2h · Devis gratuit · Sans engagement</span>
-              <button class="btn-gold-light" onclick="aiAnalyze()" id="aiBtnAnalyze">Analyser →</button>
+            <div class="dv-form-row">
+              <input type="text" id="dv-ville" placeholder="Ville">
+              <input type="email" id="dv-email" placeholder="Email">
+            </div>
+            <button class="btn-gold" onclick="dvShowResult()" style="border:none;cursor:pointer;justify-content:center;">Voir mon estimation →</button>
+            <div style="text-align:center;">
+              <button class="dv-back-btn" onclick="dvStep1()">← Changer le type</button>
             </div>
           </div>
+        </div>
 
-          <div id="aiResultArea" style="display:none;margin-top:4px;">
-            <div class="devis-result" id="devisResult" style="display:none;">
-              <div class="result-header">
-                <h4>Estimation K&amp;P Plomberie</h4>
-                <p id="r-date"></p>
-              </div>
-              <div class="result-body" id="r-body"></div>
-              <div class="result-total">
-                <div class="result-total-row"><span>Montant HT</span><span id="r-ht"></span></div>
-                <div class="result-total-row"><span>TVA 20%</span><span id="r-tva"></span></div>
-                <div class="result-total-row final"><span>Total TTC</span><span id="r-total"></span></div>
-              </div>
-              <div class="result-disclaimer">* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place. Rappel confirmé sous 2h.</div>
-              <div class="result-cta">
-                <button onclick="downloadPDF()" class="btn-gold" style="flex:1;justify-content:center;font-size:0.84rem;padding:11px;border:none;cursor:pointer;">Télécharger PDF</button>
-                <a href="tel:0698252221" class="btn-outline-navy" style="flex:1;justify-content:center;font-size:0.82rem;padding:10px;text-align:center;">Appeler maintenant</a>
-              </div>
-              <div style="padding:12px 20px;border-top:1px solid var(--border);text-align:center;">
-                <button onclick="aiReset()" style="background:none;border:none;font-size:0.8rem;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;">Recommencer</button>
-              </div>
-            </div>
+        <!-- Étape 3 : Résultat -->
+        <div id="dv-step3" class="dv-body" style="display:none">
+          <div class="dv-progress">
+            <div class="dv-dot active"></div><div class="dv-dot active"></div><div class="dv-dot active"></div>
           </div>
-
-          <!-- Champs cachés pour le PDF -->
-          <input id="g-prenom" type="hidden"><input id="g-tel" type="hidden">
-          <input id="g-type" type="hidden"><input id="g-urgence" type="hidden" value="normal">
-          <input id="g-ville" type="hidden"><input id="g-email" type="hidden">
-          <input id="g-surface" type="hidden" value="0">
-          <input id="g-date-souhaitee" type="hidden">
-          <textarea id="g-desc" style="display:none;"></textarea>
-          <div id="g-surface-wrap" class="form-hidden"></div>
+          <div id="dv-badge3"></div>
+          <div class="dv-result-box">
+            <div class="dv-price-line"><span>Montant HT</span><span id="dv-ht"></span></div>
+            <div class="dv-price-line"><span>TVA 20%</span><span id="dv-tva"></span></div>
+            <div class="dv-price-total"><span>Total TTC</span><span id="dv-ttc"></span></div>
+          </div>
+          <div class="dv-callback-box">
+            <div class="dv-callback-icon">📞</div>
+            <div class="dv-callback-text">Votre demande a bien été enregistrée.<br><strong>Nous vous rappelons sous 24h</strong> pour confirmer et planifier l'intervention.</div>
+          </div>
+          <div class="result-cta">
+            <a href="tel:0698252221" class="btn-gold" style="flex:1;justify-content:center;font-size:0.84rem;">Appeler maintenant</a>
+            <a href="https://wa.me/33698252221?text=Bonjour%20K%26P%20Plomberie%2C%20je%20souhaite%20un%20devis." class="btn-outline-navy" style="flex:1;justify-content:center;font-size:0.82rem;">WhatsApp</a>
+          </div>
+          <div class="dv-disclaimer">* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place.</div>
+          <div style="text-align:center;margin-top:12px;">
+            <button class="dv-back-btn" onclick="dvReset()">Nouvelle demande</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1795,7 +1793,7 @@ footer {
     </div>
     <div class="avis-card reveal">
       <div class="avis-stars">★★★★★</div>
-      <p class="avis-text">"Douche italienne dans une salle de bain existante. Très beau travail, conseils utiles. Garantie 3 mois vraiment rassurante."</p>
+      <p class="avis-text">"Douche italienne dans une salle de bain existante. Très beau travail, conseils utiles. La garantie décennale est vraiment rassurante."</p>
       <div class="avis-author">
         <div class="avis-avatar">TR</div>
         <div><div class="avis-name">Thomas R.</div><div class="avis-ville">Versailles (78)</div></div>
@@ -1836,7 +1834,7 @@ footer {
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">Quelle est la garantie sur vos interventions ?<span class="faq-icon">+</span></button>
-      <div class="faq-a">Chaque intervention est garantie 3 mois pièces et main d'œuvre. Si le même problème revient dans ce délai, nous revenons gratuitement, sans discussion.</div>
+      <div class="faq-a">Tous nos travaux sont couverts par notre <strong>assurance garantie décennale</strong> — soit 10 ans de couverture sur les défauts importants. Pour les petites interventions, nous garantissons également la main d'œuvre et les pièces : si le même problème revient, nous revenons gratuitement, sans discussion.</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">Fournissez-vous les pièces et matériaux ?<span class="faq-icon">+</span></button>
@@ -1873,7 +1871,7 @@ footer {
     <div>
       <div class="footer-brand-name"><em>K&amp;P</em> Plomberie</div>
       <div class="footer-tagline">Plombier professionnel · Île-de-France</div>
-      <p style="font-size:0.82rem;color:oklch(38% 0.02 255);font-weight:300;line-height:1.75;max-width:260px;">Artisan qualifié, travail soigné, tarifs honnêtes. Garantie 3 mois sur chaque intervention.</p>
+      <p style="font-size:0.82rem;color:oklch(38% 0.02 255);font-weight:300;line-height:1.75;max-width:260px;">Artisan qualifié, travail soigné, tarifs honnêtes. Garantie décennale sur tous nos travaux.</p>
     </div>
     <div class="footer-col">
       <h5>Navigation</h5>
@@ -1895,7 +1893,7 @@ footer {
     <span>© 2025 K&amp;P Plomberie — Tous droits réservés &nbsp;·&nbsp;
       <a href="#" onclick="document.getElementById('mlOverlay').classList.add('open');return false;" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Mentions légales &amp; Confidentialité</a>
     </span>
-    <span class="footer-guarantee">Garantie <em>3 mois</em> incluse sur chaque intervention</span>
+    <span class="footer-guarantee">Garantie <em>décennale</em> sur tous nos travaux</span>
   </div>
 </footer>
 
@@ -1999,8 +1997,6 @@ footer {
 </div>
 
 <!-- SCRIPTS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 // ── SCROLL REVEAL ──
 const observer = new IntersectionObserver(entries => {
@@ -2061,11 +2057,11 @@ function getBotReply(msg, history) {
   if(/neuve?|construction|travaux|réseau|installation/.test(msg))
     return '🏗️ Pour une installation complète, nous établissons un devis gratuit sur place. Appelez le 06 98 25 22 21 ou utilisez le générateur de devis.';
   if(/prix|tarif|coût|combien|budget|devis/.test(msg))
-    return '💰 Diagnostic 60€ · débouchage 80€+ · fuite 90-180€ · chauffe-eau 350-600€ · chaudière 120-180€. Tous TTC, garantie 3 mois. Quel est votre problème ?';
+    return '💰 Diagnostic 60€ · débouchage 80€+ · fuite 90-180€ · chauffe-eau 350-600€ · chaudière 120-180€. Tous TTC, garantie décennale. Quel est votre problème ?';
   if(/zone|vien|déplace|paris|idf|île-de-france|département/.test(msg))
     return '📍 Nous intervenons dans tout l\'Île-de-France (75,77,78,91,92,93,94,95), déplacement inclus sans frais cachés. Quelle est votre ville ?';
   if(/garantie|confiance|sérieux/.test(msg))
-    return '🛡️ Garantie 3 mois pièces et main d\'œuvre sur chaque intervention. Si le problème revient, nous revenons gratuitement.';
+    return '🛡️ Garantie décennale sur tous nos travaux — 10 ans de couverture. Pièces et main d\'œuvre garanties. Si le problème revient, nous revenons gratuitement.';
   if(/heure|horaire|disponible|quand|week-end|samedi/.test(msg))
     return '🕐 Lundi–Samedi 8h–19h. Urgences 24h/24 et 7j/7 : appelez le 06 98 25 22 21.';
   if(n <= 2 && /bonjour|salut|hello|bonsoir/.test(msg))
@@ -2086,295 +2082,49 @@ function appendBubble(text, type) {
   return el;
 }
 
-// ── EMAIL JS CONFIG ──
-const EMAILJS_PUBLIC_KEY  = 'VOTRE_CLE_PUBLIQUE';
-const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';
-const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';
-
-// ── AI DEVIS ──
-let aiDetectedType = null;
-
-function aiAddBubble(text, type, withTyping) {
-  const msgs = document.getElementById('aiMsgs');
-  const el = document.createElement('div');
-  el.className = `ai-bubble ${type}`;
-  if(withTyping) {
-    el.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-  } else {
-    el.innerHTML = text;
-  }
-  msgs.appendChild(el);
-  msgs.scrollTop = msgs.scrollHeight;
-  return el;
-}
-
-function analyzeDescription(desc, prenom) {
-  const d = desc.toLowerCase();
-  const nom = prenom ? prenom.split(' ')[0] : '';
-
-  // Détection urgence
-  const urgent = /urgent|urgence|inond|débord|eau partout|catastrophe|maintenant|aujourd'hui|vite/.test(d);
-
-  // Détection ville (simplifié)
-  const villeMatch = d.match(/\b(paris|boulogne|vincennes|versailles|créteil|saint-denis|argenteuil|nanterre|montreuil|ivry|vitry|courbevoie|levallois|cergy|meaux|melun)\b/i);
-  const ville = villeMatch ? villeMatch[1] : '';
-
-  // Détection type
-  let type, label;
-  if(/chauffe.eau|ballon|cumulus|eau chaude/.test(d))         { type='chauffe-eau';         label='Remplacement chauffe-eau'; }
-  else if(/chaudière|condensation|gaz|fioul/.test(d))         { type='chaudiere-entretien'; label='Entretien / réparation chaudière'; }
-  else if(/installe?.*chaudière|nouvelle chaudière/.test(d))  { type='chaudiere-install';   label='Installation chaudière'; }
-  else if(/débouche|bouché|bouchée|évier|wc.*bouchée?|canalisation/.test(d)) { type='debouchage'; label='Débouchage canalisation'; }
-  else if(/fuite|fui|goutte|humidité|infiltr|dégât des eaux/.test(d)) { type='fuite'; label='Recherche et réparation de fuite'; }
-  else if(/salle de bain.*complet|refaire.*salle|rénov.*complet/.test(d)) { type='sdb-complete'; label='Rénovation complète salle de bain'; }
-  else if(/salle de bain|douche|baignoire|carrelage|italienne/.test(d)) { type='sdb-partielle'; label='Rénovation salle de bain'; }
-  else if(/wc|toilette|sanitaire/.test(d))                    { type='wc';                  label='Installation WC'; }
-  else if(/robinet|mitigeur/.test(d))                         { type='robinet';             label='Remplacement robinet/mitigeur'; }
-  else if(/contrat|entretien annuel|maintenance/.test(d))     { type='contrat';             label='Contrat entretien annuel'; }
-  else if(/plomberie neuve|construction|réseau neuf/.test(d)) { type='plomberie-neuve';     label='Plomberie neuve'; }
-  else                                                         { type='depannage';           label='Dépannage plomberie'; }
-
-  // Message de confirmation
-  const intro = nom ? `${nom}, d` : 'D';
-  let confirmation = `${intro}'après votre description, il s'agit d'une intervention : <strong>${label}</strong>${urgent ? ' en urgence' : ''}. Est-ce bien ça ?`;
-
-  return { type, label, urgent, confirmation, ville };
-}
-
-async function aiAnalyze() {
-  const prenom = document.getElementById('ai-prenom').value.trim();
-  const tel    = document.getElementById('ai-tel').value.trim();
-  const desc   = document.getElementById('aiProblem').value.trim();
-
-  if(!desc) { document.getElementById('aiProblem').focus(); return; }
-
-  // Masquer le formulaire
-  document.getElementById('aiInputArea').style.display = 'none';
-
-  // Bubble utilisateur
-  aiAddBubble(`"${desc}"`, 'user');
-
-  // Bubble loading
-  const loader = aiAddBubble('', 'bot', true);
-
-  try {
-    const parsed = analyzeDescription(desc, prenom);
-    await new Promise(r => setTimeout(r, 1000));
-
-    aiDetectedType = parsed.type;
-
-    // Mise à jour des champs cachés
-    document.getElementById('g-prenom').value = prenom;
-    document.getElementById('g-tel').value = tel;
-    document.getElementById('g-type').value = parsed.type;
-    document.getElementById('g-urgence').value = parsed.urgent ? 'urgent' : 'normal';
-    document.getElementById('g-ville').value = parsed.ville || '';
-    document.getElementById('g-desc').value = desc;
-
-    // Afficher la confirmation
-    const confirmHtml = `
-      <p style="margin-bottom:12px;">${parsed.confirmation}</p>
-      <div class="ai-confirm-btns">
-        <button class="ai-confirm-btn yes" onclick="aiConfirm(true)">Oui, c'est ça</button>
-        <button class="ai-confirm-btn no" onclick="aiConfirm(false)">Non, préciser</button>
-      </div>`;
-    loader.innerHTML = confirmHtml;
-
-  } catch(err) {
-    loader.innerHTML = 'Désolé, une erreur est survenue. <a href="tel:0698252221" style="color:var(--gold);font-weight:600;">Appelez-nous directement →</a>';
-  }
-}
-
-function aiConfirm(yes) {
-  // Supprimer les boutons de confirmation
-  document.querySelectorAll('.ai-confirm-btns').forEach(el => el.remove());
-
-  if(yes) {
-    aiAddBubble('Oui, c\'est exactement ça.', 'user');
-    const loader = aiAddBubble('', 'bot', true);
-    setTimeout(() => {
-      loader.innerHTML = 'Parfait ! Je génère votre estimation...';
-      setTimeout(() => {
-        generateDevis();
-        document.getElementById('aiResultArea').style.display = 'block';
-      }, 800);
-    }, 700);
-  } else {
-    aiAddBubble('Non, je veux préciser.', 'user');
-    aiAddBubble('D\'accord ! Décrivez votre problème avec plus de détails, je vais réanalyser.', 'bot');
-    // Réafficher le formulaire
-    document.getElementById('aiProblem').value = '';
-    document.getElementById('aiInputArea').style.display = 'block';
-    document.getElementById('aiProblem').focus();
-  }
-}
-
-function aiReset() {
-  document.getElementById('aiMsgs').innerHTML = '<div class="ai-bubble bot">Bonjour ! Décrivez-moi votre problème de plomberie en quelques mots — je vais analyser votre demande et vous préparer une estimation personnalisée.</div>';
-  document.getElementById('aiProblem').value = '';
-  document.getElementById('ai-prenom').value = '';
-  document.getElementById('ai-tel').value = '';
-  document.getElementById('aiInputArea').style.display = 'block';
-  document.getElementById('aiResultArea').style.display = 'none';
-  document.getElementById('devisResult').style.display = 'none';
-  aiDetectedType = null;
-  currentDevis = null;
-}
-
-function updateFormContext() {}
-
-
-const TARIFS = {
-  depannage:           { label:'Dépannage urgent',                   min:60,  max:180,  items:[["Déplacement + diagnostic","60€"],["Main d'œuvre","selon complexité"]] },
-  fuite:               { label:'Recherche et réparation de fuite',   min:90,  max:250,  items:[["Recherche de fuite","60–120€"],["Réparation","30–130€"]] },
-  debouchage:          { label:'Débouchage canalisation',            min:80,  max:180,  items:[["Diagnostic","60€"],["Débouchage","20–120€"]] },
-  'chauffe-eau':       { label:'Remplacement chauffe-eau',           min:350, max:600,  items:[["Dépose ancien appareil","inclus"],["Fourniture + pose","350–600€"],["Mise en service","inclus"]] },
-  'chaudiere-entretien':{ label:'Entretien chaudière',               min:120, max:180,  items:[["Nettoyage brûleur","inclus"],["Vérification sécurités","inclus"],["Rapport","inclus"]] },
-  'chaudiere-install': { label:'Installation chaudière',             min:800, max:2500, items:[["Fourniture chaudière","selon modèle"],["Pose et raccordements","400–800€"],["Mise en service","inclus"]] },
-  'sdb-partielle':     { label:'Rénovation partielle salle de bain', min:800, max:2500, items:[["Dépose et évacuation","150–300€"],["Raccordements plomberie","300–600€"],["Pose sanitaires","250–500€"]] },
-  'sdb-complete':      { label:'Rénovation complète salle de bain',  min:3000,max:8000, items:[["Dépose complète","400–800€"],["Plomberie neuve","800–2000€"],["Pose sanitaires et carrelage","1800–5200€"]] },
-  wc:                  { label:'Installation WC',                    min:150, max:300,  items:[["Raccordement eau","inclus"],["Pose WC","150–300€"]] },
-  robinet:             { label:'Remplacement robinet/mitigeur',      min:120, max:200,  items:[["Dépose ancien robinet","inclus"],["Pose nouveau robinet","120–200€"]] },
-  contrat:             { label:'Contrat entretien annuel',           min:200, max:350,  items:[["Entretien annuel chaudière","inclus"],["Vérification installation","inclus"],["Priorité d'intervention","inclus"]] },
-  'plomberie-neuve':   { label:'Plomberie neuve',                    min:1200,max:5000, items:[["Étude et plans","inclus"],["Fourniture matériaux","selon surface"],["Main d'œuvre","selon complexité"]] }
+// ── DEVIS SIMPLE ──
+let dvType = null, dvLabel = null, dvMin = 0, dvMax = 0;
+const DV_TARIFS = {
+  'fuite':       { label:'Fuite d\'eau',             min:90,   max:250  },
+  'debouchage':  { label:'Débouchage',               min:80,   max:180  },
+  'chauffe-eau': { label:'Chauffe-eau',              min:350,  max:600  },
+  'chaudiere':   { label:'Chaudière',                min:120,  max:400  },
+  'robinet':     { label:'Robinetterie',             min:80,   max:200  },
+  'sdb':         { label:'Rénovation salle de bain', min:800,  max:5000 },
+  'wc':          { label:'WC / Sanitaires',          min:150,  max:300  },
+  'autre':       { label:'Urgence / Autre',          min:60,   max:200  }
 };
-const SURFACE_TYPES = ['sdb-partielle','sdb-complete','plomberie-neuve'];
-function updateFormContext() {
-  const type = document.getElementById('g-type').value;
-  document.getElementById('g-surface-wrap').style.display = SURFACE_TYPES.includes(type) ? 'block' : 'none';
+function dvSelectType(type) {
+  const t = DV_TARIFS[type];
+  dvType = type; dvLabel = t.label; dvMin = t.min; dvMax = t.max;
+  document.getElementById('dv-step1').style.display = 'none';
+  document.getElementById('dv-badge2').innerHTML = `<div class="dv-selected-badge">✓ ${t.label}</div>`;
+  document.getElementById('dv-step2').style.display = 'block';
 }
-function generateDevis() {
-  const type    = document.getElementById('g-type').value;
-  const urgence = document.getElementById('g-urgence').value;
-  const prenom  = document.getElementById('g-prenom').value.trim();
-  const tel     = document.getElementById('g-tel').value.trim();
-  const email   = document.getElementById('g-email').value.trim();
-  const ville   = document.getElementById('g-ville').value.trim();
-  const desc    = document.getElementById('g-desc').value.trim();
-  const surface = parseFloat(document.getElementById('g-surface').value) || 0;
-  const dateSouh = document.getElementById('g-date-souhaitee').value;
-  if(!type) { alert("Veuillez sélectionner un type d'intervention."); return; }
-  const t = TARIFS[type];
-  let min = t.min, max = t.max;
-  if(surface > 0 && SURFACE_TYPES.includes(type)) { const f = Math.max(1, surface/8); min = Math.round(min * Math.sqrt(f)); max = Math.round(max * Math.sqrt(f)); }
-  if(urgence === 'urgent') { min = Math.round(min * 1.2); max = Math.round(max * 1.2); }
-  const now = new Date();
-  const devisNum = 'DEV-' + now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '-' + String(Math.floor(Math.random()*900)+100);
-  const tvaMin = Math.round(min * .20), tvaMax = Math.round(max * .20);
-  const ttcMin = min + tvaMin, ttcMax = max + tvaMax;
-  const totalHT = min.toLocaleString('fr-FR') + ' € – ' + max.toLocaleString('fr-FR') + ' €';
-  const totalTVA = tvaMin.toLocaleString('fr-FR') + ' € – ' + tvaMax.toLocaleString('fr-FR') + ' €';
-  const totalTTC = ttcMin.toLocaleString('fr-FR') + ' € – ' + ttcMax.toLocaleString('fr-FR') + ' €';
-  currentDevis = { type, urgence, prenom, tel, email, ville, desc, surface, dateSouh, min, max, ttcMin, ttcMax, totalHT, totalTVA, totalTTC, devisNum, date: now };
-  document.getElementById('r-date').textContent = `Estimé le ${now.toLocaleDateString('fr-FR')} — Réf. ${devisNum}`;
-  let html = '';
-  t.items.forEach(item => { html += `<div class="result-line"><span>${item[0]}</span><strong>${item[1]}</strong></div>`; });
-  if(urgence === 'urgent') html += `<div class="result-line" style="color:var(--gold-2)"><span>Majoration urgence +20%</span><strong>incluse</strong></div>`;
-  document.getElementById('r-body').innerHTML = html;
-  document.getElementById('r-ht').textContent = totalHT;
-  document.getElementById('r-tva').textContent = totalTVA;
-  document.getElementById('r-total').textContent = totalTTC;
-  const btnEmail = document.getElementById('btn-send-email');
-  btnEmail.disabled = false; btnEmail.textContent = 'Envoyer par email';
-  document.getElementById('email-status').style.display = 'none';
-  document.getElementById('devisResult').style.display = 'block';
-  document.getElementById('devisResult').scrollIntoView({ behavior:'smooth', block:'nearest' });
+function dvStep1() {
+  document.getElementById('dv-step2').style.display = 'none';
+  document.getElementById('dv-step1').style.display = 'block';
 }
-function downloadPDF() {
-  if(!currentDevis) return;
-  const d = currentDevis; const t = TARIFS[d.type];
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit:'mm', format:'a4' });
-  const W = 210;
-  const NAVY = [20,25,50], GOLD = [190,155,80], GREY = [80,90,110], LIGHT = [248,246,240];
-  doc.setFillColor(...NAVY); doc.rect(0, 0, W, 40, 'F');
-  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(16);
-  doc.text('K&P Plomberie', 14, 18);
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GOLD);
-  doc.text('Plombier professionnel · Île-de-France', 14, 25);
-  doc.setTextColor(180,180,200); doc.text('06 98 25 22 21  ·  kp-plomberie@outlook.fr  ·  Garantie 3 mois', 14, 31);
-  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(10);
-  doc.text('DEVIS ESTIMATIF', W-14, 18, {align:'right'});
-  doc.setFont('helvetica','normal'); doc.setFontSize(8); doc.setTextColor(...GOLD);
-  doc.text('N° ' + d.devisNum, W-14, 25, {align:'right'});
-  doc.text(d.date.toLocaleDateString('fr-FR'), W-14, 31, {align:'right'});
-  doc.setDrawColor(...GOLD); doc.setLineWidth(0.5); doc.line(14, 44, W-14, 44);
-  doc.setFillColor(...LIGHT); doc.setDrawColor(220,215,200); doc.roundedRect(14, 48, 86, 42, 2, 2, 'FD');
-  doc.roundedRect(110, 48, 86, 42, 2, 2, 'FD');
-  doc.setTextColor(...GOLD); doc.setFont('helvetica','bold'); doc.setFontSize(7);
-  doc.text('CLIENT', 19, 56); doc.text('INTERVENTION', 115, 56);
-  doc.setTextColor(...NAVY); doc.setFont('helvetica','normal'); doc.setFontSize(9);
-  doc.text(d.prenom || '—', 19, 64); doc.text('Tél : ' + (d.tel || '—'), 19, 71);
-  doc.text('Email : ' + (d.email || '—'), 19, 78); doc.text('Ville : ' + (d.ville || '—'), 19, 85);
-  const tLines = doc.splitTextToSize(t.label, 80);
-  doc.text(tLines, 115, 64); doc.text('Urgence : ' + (d.urgence === 'urgent' ? 'Oui' : 'Non'), 115, 64 + tLines.length*5 + 3);
-  let y = 98;
-  doc.setFillColor(...NAVY); doc.rect(14, y, W-28, 8, 'F');
-  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(8.5);
-  doc.text('DÉSIGNATION', 19, y+5.5); doc.text('MONTANT', W-18, y+5.5, {align:'right'});
-  y += 8;
-  t.items.forEach((item, i) => {
-    doc.setFillColor(i%2===0 ? 248:255, i%2===0 ? 246:255, i%2===0 ? 240:255);
-    doc.rect(14, y, W-28, 8, 'F');
-    doc.setTextColor(...NAVY); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-    doc.text(item[0], 19, y+5.5); doc.text(item[1], W-18, y+5.5, {align:'right'}); y += 8;
-  });
-  y += 3;
-  doc.setFillColor(...LIGHT); doc.setDrawColor(220,215,200);
-  doc.rect(14, y, W-28, 8, 'FD'); doc.setTextColor(...GREY); doc.setFont('helvetica','normal'); doc.setFontSize(8.5);
-  doc.text('Montant HT', 19, y+5.5); doc.text(d.totalHT, W-18, y+5.5, {align:'right'}); y+=8;
-  doc.setFillColor(...LIGHT); doc.rect(14, y, W-28, 8, 'FD');
-  doc.text('TVA 20%', 19, y+5.5); doc.text(d.totalTVA, W-18, y+5.5, {align:'right'}); y+=8;
-  doc.setFillColor(245, 240, 220); doc.setDrawColor(...GOLD); doc.rect(14, y, W-28, 13, 'FD');
-  doc.setTextColor(...NAVY); doc.setFont('helvetica','bold'); doc.setFontSize(11);
-  doc.text('TOTAL TTC', 19, y+9); doc.setTextColor(...GOLD); doc.text(d.totalTTC, W-18, y+9, {align:'right'}); y+=19;
-  doc.setFillColor(...LIGHT); doc.rect(14, y, W-28, 12, 'F');
-  doc.setTextColor(...GREY); doc.setFontSize(7.5); doc.setFont('helvetica','italic');
-  doc.text('* Estimation indicative hors fournitures. Devis définitif gratuit après diagnostic sur place.', 18, y+5);
-  doc.text('Garantie 3 mois sur chaque intervention. Paiement après votre satisfaction.', 18, y+10); y+=18;
-  doc.setDrawColor(220,215,200); doc.setTextColor(...GREY); doc.setFontSize(8); doc.setFont('helvetica','normal');
-  doc.text('Signature client :', 14, y+5); doc.rect(14, y+8, 82, 22);
-  doc.text('Cachet K&P Plomberie :', 114, y+5); doc.rect(114, y+8, 82, 22);
-  doc.setFillColor(...NAVY); doc.rect(0, 276, W, 21, 'F');
-  doc.setTextColor(255,255,255); doc.setFont('helvetica','bold'); doc.setFontSize(9);
-  doc.text('K&P Plomberie', 14, 284); doc.setFont('helvetica','normal'); doc.setFontSize(8);
-  doc.text('06 98 25 22 21  ·  kp-plomberie@outlook.fr', 14, 291);
-  doc.setTextColor(...GOLD); doc.setFontSize(7.5);
-  doc.text('Garantie 3 mois · IDF 75 77 78 91 92 93 94 95', W-14, 287, {align:'right'});
-  doc.save('Devis_KP_Plomberie_' + d.devisNum + '.pdf');
+function dvShowResult() {
+  const prenom = document.getElementById('dv-prenom').value.trim();
+  const tel    = document.getElementById('dv-tel').value.trim();
+  if (!prenom || !tel) { alert('Merci de renseigner votre prénom et votre téléphone.'); return; }
+  const tvaMin = Math.round(dvMin * 0.20), tvaMax = Math.round(dvMax * 0.20);
+  const ttcMin = dvMin + tvaMin, ttcMax = dvMax + tvaMax;
+  document.getElementById('dv-ht').textContent  = `${dvMin.toLocaleString('fr-FR')} € – ${dvMax.toLocaleString('fr-FR')} €`;
+  document.getElementById('dv-tva').textContent = `${tvaMin.toLocaleString('fr-FR')} € – ${tvaMax.toLocaleString('fr-FR')} €`;
+  document.getElementById('dv-ttc').textContent = `${ttcMin.toLocaleString('fr-FR')} € – ${ttcMax.toLocaleString('fr-FR')} €`;
+  document.getElementById('dv-badge3').innerHTML = `<div class="dv-selected-badge">✓ ${dvLabel}</div>`;
+  document.getElementById('dv-step2').style.display = 'none';
+  document.getElementById('dv-step3').style.display = 'block';
 }
-async function sendByEmail() {
-  if(!currentDevis) return;
-  const d = currentDevis;
-  if(!d.email) { const mail = prompt('Votre adresse email :'); if(!mail) return; document.getElementById('g-email').value = mail; d.email = mail; }
-  if(EMAILJS_PUBLIC_KEY === 'VOTRE_CLE_PUBLIQUE') {
-    showEmailStatus('warning', 'Envoi email non configuré. <a href="mailto:kp-plomberie@outlook.fr?subject=Devis ' + d.devisNum + '" style="color:inherit;font-weight:600;">Cliquez ici pour envoyer manuellement →</a>');
-    return;
-  }
-  const btn = document.getElementById('btn-send-email');
-  btn.disabled = true; btn.textContent = 'Envoi…';
-  try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { to_email:d.email, client_name:d.prenom||'Client', client_tel:d.tel||'—', client_email:d.email, intervention:TARIFS[d.type].label, estimation:d.totalTTC, devis_number:d.devisNum, date_devis:d.date.toLocaleDateString('fr-FR') }, EMAILJS_PUBLIC_KEY);
-    btn.textContent = 'Envoyé';
-    showEmailStatus('success', 'Devis envoyé à <strong>' + d.email + '</strong>');
-  } catch(err) {
-    btn.disabled = false; btn.textContent = 'Envoyer par email';
-    showEmailStatus('error', 'Erreur. Écrivez-nous : <a href="mailto:kp-plomberie@outlook.fr" style="color:inherit;font-weight:600;">kp-plomberie@outlook.fr</a>');
-  }
+function dvReset() {
+  document.getElementById('dv-step3').style.display = 'none';
+  document.getElementById('dv-step1').style.display = 'block';
+  ['dv-prenom','dv-tel','dv-ville','dv-email'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
+  dvType = null; dvLabel = null; dvMin = 0; dvMax = 0;
 }
-function showEmailStatus(type, html) {
-  const el = document.getElementById('email-status');
-  const styles = { success:['var(--green-bg)','var(--green)'], warning:['var(--gold-pale)','var(--gold-2)'], error:['#FEF2F2','#C53030'] };
-  const [bg, color] = styles[type] || styles.warning;
-  el.style.cssText = `background:${bg};color:${color};display:block;`;
-  el.innerHTML = html;
-}
-function resetDevis() {
-  document.getElementById('devisResult').style.display = 'none';
-  ['g-type','g-prenom','g-tel','g-email','g-ville','g-desc','g-surface','g-date-souhaitee'].forEach(id => { const el = document.getElementById(id); if(el) el.value = ''; });
-  document.getElementById('g-urgence').value = 'normal';
-  currentDevis = null;
-}
+
 
 // ── BANDEAU PROMO ──
 function closeBanner() {
